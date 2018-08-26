@@ -15,12 +15,13 @@ import java.util.ArrayList;
 
 import io.reactivex.observers.DisposableObserver;
 
+import static com.example.mheshamg.xmovies.rest.Constants.API_KEY;
+
 public class MainActivityPresenter
 {
 
     private final static  String TAG=MainActivityPresenter.class.getSimpleName();
 
-    private final static String API_KEY = "134da0f4a51a36498831652090ad9aaf";
 
     private MainActivityViewInterface mMainActivityViewInterface;
     private Context mContext;
@@ -77,6 +78,7 @@ public class MainActivityPresenter
 
             @Override
             public void onNext(MoviesResponse moviesResponse) {
+                Log.i(TAG,moviesResponse.getResults().size()+"");
                 moviesList.addAll(moviesResponse.getResults());
                 moviesAdapter.notifyDataSetChanged();
             }

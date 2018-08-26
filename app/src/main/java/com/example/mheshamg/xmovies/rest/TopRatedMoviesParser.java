@@ -52,6 +52,7 @@ public class TopRatedMoviesParser {
         return new DisposableSingleObserver<MoviesResponse>() {
             @Override
             public void onSuccess(MoviesResponse moviesResponse) {
+                Log.i(TAG,moviesResponse.getResults().size()+"");
                 moviesResponsePublishSubject.onNext(moviesResponse);
             }
 
