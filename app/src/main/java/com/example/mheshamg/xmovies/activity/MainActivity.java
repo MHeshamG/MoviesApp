@@ -5,28 +5,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.mheshamg.xmovies.R;
 import com.example.mheshamg.xmovies.adapter.MoviesAdapter;
-import com.example.mheshamg.xmovies.model.Movie;
-import com.example.mheshamg.xmovies.model.MoviesResponse;
+
 import com.example.mheshamg.xmovies.presenter.MainActivityPresenter;
-import com.example.mheshamg.xmovies.rest.ApiClient;
-import com.example.mheshamg.xmovies.rest.ApiInterface;
-import com.facebook.drawee.backends.pipeline.Fresco;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DisposableSingleObserver;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements MainActivityPresenter.MainActivityViewInterface {
 
@@ -36,14 +26,17 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
 
     private RecyclerView recyclerView ;
 
-
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mainActivityPresenter=new MainActivityPresenter(this,this);
 
@@ -57,6 +50,33 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
 
         mainActivityPresenter.fetchTopRatedMovies();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) {
+
+            //noinspection SimplifiableIfStatement
+            case R.id.action_search:
+                Toast.makeText(this, "search", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.action_settings:
+                return true;
+
+            default:
+            return super.onOptionsItemSelected(item);
+        }
     }
 
 
