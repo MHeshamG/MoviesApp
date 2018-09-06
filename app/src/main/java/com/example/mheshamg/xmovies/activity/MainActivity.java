@@ -1,6 +1,7 @@
 
 package com.example.mheshamg.xmovies.activity;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -9,19 +10,20 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.mheshamg.xmovies.R;
-import com.example.mheshamg.xmovies.adapter.MoviesAdapter;
 
+import com.example.mheshamg.xmovies.fagments.BaseFragment;
 import com.example.mheshamg.xmovies.fagments.FragmentDrawer;
-import com.example.mheshamg.xmovies.fagments.HomeFragment;
+import com.example.mheshamg.xmovies.fagments.TopRatedFragment;
 import com.example.mheshamg.xmovies.presenter.MainActivityPresenter;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
+import static com.example.mheshamg.xmovies.fagments.FragmentsNames.TOP_RATED_FRAGMENT;
 
 
 public class MainActivity extends AppCompatActivity implements MainActivityPresenter.MainActivityViewInterface,FragmentDrawer.FragmentDrawerListener {
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
     private MainActivityPresenter mainActivityPresenter;
 
 
-    private RecyclerView recyclerView ;
+
 
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
@@ -50,17 +52,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
         drawerFragment.setDrawerListener(this);
 
-        mainActivityPresenter=new MainActivityPresenter(this,this);
+        mainActivityPresenter=new MainActivityPresenter(this);
 
         if(!mainActivityPresenter.initialize())
             return;
 
-
-        recyclerView = (RecyclerView) findViewById(R.id.movies_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(mainActivityPresenter.getMoviesAdapter());
-
-        mainActivityPresenter.fetchTopRatedMovies();
+        Fresco.initialize(this);
+        mainActivityPresenter.getFragment(TOP_RATED_FRAGMENT);
 
     }
 
@@ -96,48 +94,25 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mainActivityPresenter.disposeMoviesObserver();
     }
 
     @Override
-    public void updateRecyclerView() {
+    public void updateView(BaseFragment baseFragment) {
 
+        if (baseFragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_body, baseFragment);
+            fragmentTransaction.commit();
+
+            // set the toolbar title
+            //getSupportActionBar().setTitle(title);
+        }
     }
 
     @Override
     public void onDrawerItemSelected(View view, int position) {
 
     }
-
-    private void displayView(int position) {
-        Fragment fragment = null;
-        String title = getString(R.string.app_name);
-        switch (position) {
-            case 0:
-                fragment = new HomeFragment();
-                title = getString(R.string.title_home);
-                break;
-            case 1:
-                fragment = new FriendsFragment();
-                title = getString(R.string.title_friends);
-                break;
-            case 2:
-                fragment = new MessagesFragment();
-                title = getString(R.string.title_messages);
-                break;
-            default:
-                break;
-        }
-
-        if (fragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_body, fragment);
-            fragmentTransaction.commit();
-
-            // set the toolbar title
-            getSupportActionBar().setTitle(title);
-        }
-    }
 }
-}
+
