@@ -3,7 +3,9 @@ package com.example.mheshamg.xmovies.activity;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,19 +25,24 @@ import com.example.mheshamg.xmovies.fagments.TopRatedFragment;
 import com.example.mheshamg.xmovies.presenter.MainActivityPresenter;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
+import static com.example.mheshamg.xmovies.fagments.FragmentsNames.POPULAR_FRAGMENT;
 import static com.example.mheshamg.xmovies.fagments.FragmentsNames.TOP_RATED_FRAGMENT;
+import static com.example.mheshamg.xmovies.fagments.FragmentsNames.UPCOMING_FRAGMENT;
+
+import android.support.design.widget.TabLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements MainActivityPresenter.MainActivityViewInterface,FragmentDrawer.FragmentDrawerListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private MainActivityPresenter mainActivityPresenter;
-
-
-
-
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +65,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
             return;
 
         Fresco.initialize(this);
-        mainActivityPresenter.getFragment(TOP_RATED_FRAGMENT);
+
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
 
     }
 
@@ -99,20 +112,50 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
     @Override
     public void updateView(BaseFragment baseFragment) {
 
-        if (baseFragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_body, baseFragment);
-            fragmentTransaction.commit();
-
-            // set the toolbar title
-            //getSupportActionBar().setTitle(title);
-        }
     }
 
     @Override
     public void onDrawerItemSelected(View view, int position) {
 
     }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(mainActivityPresenter.getFragment(TOP_RATED_FRAGMENT), "Top Rated");
+        adapter.addFragment(mainActivityPresenter.getFragment(UPCOMING_FRAGMENT), "Up Coming");
+        adapter.addFragment(mainActivityPresenter.getFragment(POPULAR_FRAGMENT), "Popular");
+       //adapter.addFragment(new ThreeFragment(), "THREE");
+        viewPager.setAdapter(adapter);
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
+
 }
 

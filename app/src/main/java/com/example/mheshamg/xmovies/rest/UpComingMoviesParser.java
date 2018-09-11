@@ -15,23 +15,27 @@ import io.reactivex.subjects.PublishSubject;
 
 import static com.example.mheshamg.xmovies.rest.Constants.API_KEY;
 
+public class UpComingMoviesParser extends BaseParser {
 
-public class TopRatedMoviesParser extends BaseParser {
+    private static final String TAG= UpComingMoviesParser.class.getSimpleName();
 
-    private static final String TAG= TopRatedMoviesParser.class.getSimpleName();
+    public UpComingMoviesParser()
+    {
+
+    }
 
     @Override
     public void fetchTopRatedMovies()
     {
-        Single<MoviesResponse> moviesResponseSingleObservable = apiService.getTopRatedMovies(API_KEY);
+        Single<MoviesResponse> moviesResponseSingleObservable = apiService.getUpComingMovies(API_KEY);
         moviesResponseSingleObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(moviesResponseDisposableSingleObserver);
     }
-
     @Override
     public DisposableSingleObserver<MoviesResponse> getMoviesResponseObserver() {
         Log.i(TAG,"getMoviesResponseObserver");
         return super.getMoviesResponseObserver();
     }
 }
+

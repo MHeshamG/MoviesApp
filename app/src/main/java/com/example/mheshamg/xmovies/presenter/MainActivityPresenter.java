@@ -2,10 +2,14 @@ package com.example.mheshamg.xmovies.presenter;
 
 import com.example.mheshamg.xmovies.fagments.BaseFragment;
 import com.example.mheshamg.xmovies.fagments.FragmentsNames;
+import com.example.mheshamg.xmovies.fagments.PopularFragment;
 import com.example.mheshamg.xmovies.fagments.TopRatedFragment;
+import com.example.mheshamg.xmovies.fagments.UpComingFragment;
 
 
+import static com.example.mheshamg.xmovies.fagments.FragmentsNames.POPULAR_FRAGMENT;
 import static com.example.mheshamg.xmovies.fagments.FragmentsNames.TOP_RATED_FRAGMENT;
+import static com.example.mheshamg.xmovies.fagments.FragmentsNames.UPCOMING_FRAGMENT;
 import static com.example.mheshamg.xmovies.rest.Constants.API_KEY;
 
 public class MainActivityPresenter
@@ -34,10 +38,24 @@ public class MainActivityPresenter
         return true;
     }
 
-    public void getFragment(Enum<FragmentsNames> fragmentName)
+    public BaseFragment getFragment(Enum<FragmentsNames> fragmentName)
     {
-        if(fragmentName== TOP_RATED_FRAGMENT)
-            mMainActivityViewInterface.updateView(new TopRatedFragment());
+        BaseFragment baseFragment=null;
+
+        if(fragmentName== TOP_RATED_FRAGMENT){
+            baseFragment=new TopRatedFragment();
+            mMainActivityViewInterface.updateView(baseFragment);
+        }
+        else if(fragmentName== UPCOMING_FRAGMENT){
+            baseFragment=new UpComingFragment();
+            mMainActivityViewInterface.updateView(baseFragment);
+        }
+        else if(fragmentName== POPULAR_FRAGMENT){
+            baseFragment=new PopularFragment();
+            mMainActivityViewInterface.updateView(baseFragment);
+        }
+        return baseFragment;
+
     }
 
     /**
