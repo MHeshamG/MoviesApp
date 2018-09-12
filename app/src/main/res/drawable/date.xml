@@ -1,28 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:viewportWidth="1000"
-    android:viewportHeight="1000"
-    android:width="1000dp"
-    android:height="1000dp">
+    android:viewportWidth="44"
+    android:viewportHeight="51"
+    android:width="44dp"
+    android:height="51dp">
     <path
-        android:pathData="M859.4 75.3l-98.1 0 0 -33C761.3 24.7 746.7 9.9 728.6 9.9 710.5 10 696 24.5 696 42.4l0 33 -392 0 0 -33C304 24.8 289.4 10 271.3 10 253.1 10 238.6 24.5 238.6 42.4l0 33 -98.1 0c-53.8 0 -97.9 43.8 -97.9 97.9l0 718.9c0 53.8 43.8 97.9 97.9 97.9l718.9 0c53.8 0 97.9 -43.8 97.9 -97.9l0 -719c0 -53.8 -43.8 -97.9 -97.9 -97.9zM892 859.2c0 36.2 -29.3 65.5 -65.5 65.5l-653 0c-36.2 0 -65.5 -29.3 -65.5 -65.5l0 -489.9 784 0 0 489.9zm0 -555.2l-784 0 0 -97.8c0 -36.2 29.3 -65.5 65.5 -65.5l65.2 0 0 33c0 17.6 14.6 32.4 32.7 32.4 18.2 0 32.7 -14.5 32.7 -32.4l0 -33 392 0 0 0 0 33c0 17.6 14.6 32.4 32.7 32.4 18.2 0 32.7 -14.5 32.7 -32.4l0 -33 65.2 0c36.2 0 65.5 29.3 65.5 65.5l0 97.8z"
-        android:fillColor="@color/colorPrimaryDark" />
-    <path
-        android:pathData="M663.3 467.3l130.7 0 0 130.7 -130.7 0 0 -130.7 0 0z"
-        android:fillColor="@color/colorPrimaryDark" />
-    <path
-        android:pathData="M663.3 696l130.7 0 0 130.7 -130.7 0 0 -130.7z"
-        android:fillColor="@color/colorPrimaryDark" />
-    <path
-        android:pathData="M434.7 696l130.7 0 0 130.7 -130.7 0 0 -130.7 0 0z"
-        android:fillColor="@color/colorPrimaryDark" />
-    <path
-        android:pathData="M434.7 467.3l130.7 0 0 130.7 -130.7 0 0 -130.7 0 0z"
-        android:fillColor="@color/colorPrimaryDark" />
-    <path
-        android:pathData="M206 696l130.7 0 0 130.7 -130.7 0 0 -130.7z"
-        android:fillColor="@color/colorPrimaryDark" />
-    <path
-        android:pathData="M206 467.3l130.7 0 0 130.7 -130.7 0 0 -130.7 0 0z"
-        android:fillColor="@color/colorPrimaryDark" />
+        android:pathData="M12 192l424 0c6.6 0 12 5.4 12 12l0 260c0 26.5 -21.5 48 -48 48L48 512C21.5 512 0 490.5 0 464L0 204c0 -6.6 5.4 -12 12 -12zm436 -44l0 -36C448 85.5 426.5 64 400 64l-48 0 0 -52C352 5.4 346.6 0 340 0l-40 0c-6.6 0 -12 5.4 -12 12l0 52 -128 0 0 -52C160 5.4 154.6 0 148 0L108 0C101.4 0 96 5.4 96 12l0 52 -48 0C21.5 64 0 85.5 0 112l0 36c0 6.6 5.4 12 12 12l424 0c6.6 0 12 -5.4 12 -12z"
+        android:fillColor="#000000" />
 </vector>
