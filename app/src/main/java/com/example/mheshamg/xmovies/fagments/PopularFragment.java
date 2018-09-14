@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import static android.support.constraint.Constraints.TAG;
 
 public class PopularFragment extends BaseFragment  implements MoviesAdapter.OnMovieItemClickListener {
-    private PopularFragmentPresenter popularFragmentPresenter;
 
     public PopularFragment() {
         // Required empty public constructor
@@ -34,33 +33,10 @@ public class PopularFragment extends BaseFragment  implements MoviesAdapter.OnMo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context=getContext();
-        popularFragmentPresenter=new PopularFragmentPresenter();
-        popularFragmentPresenter.setView(this);
-        MoviesAdapter=new MoviesAdapter(popularFragmentPresenter.getMoviesList(), R.layout.list_item_movie,context,this);
-        popularFragmentPresenter.retriveData();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_movies, container, false);
-
-        DiscreteScrollView recyclerView = rootView.findViewById(R.id.movies_recycler_view);
-
-        recyclerView.setItemTransformer(new ScaleTransformer.Builder()
-                .setMinScale(0.8f)
-                .build());
-
-        recyclerView.setAdapter(MoviesAdapter);
-
-
-        // Inflate the layout for this fragment
-        return rootView;
-    }
-
-    @Override
-    public void updateView(ArrayList<Movie> movies) {
-        MoviesAdapter.notifyDataSetChanged();
+        baseFragmentPresenter=new PopularFragmentPresenter();
+        baseFragmentPresenter.setView(this);
+        MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(), R.layout.list_item_movie,context,this);
+        baseFragmentPresenter.retriveData();
     }
 
     @Override

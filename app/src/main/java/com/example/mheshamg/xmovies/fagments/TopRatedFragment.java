@@ -33,7 +33,6 @@ public class TopRatedFragment extends BaseFragment implements MoviesAdapter.OnMo
 
     private static final String TAG=TopRatedFragment.class.getSimpleName();
 
-    private TopRatedFragmentPresenter topRatedFragmentPresenter;
 
     public TopRatedFragment() {
         // Required empty public constructor
@@ -44,29 +43,11 @@ public class TopRatedFragment extends BaseFragment implements MoviesAdapter.OnMo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context=getContext();
-        topRatedFragmentPresenter=new TopRatedFragmentPresenter();
-        topRatedFragmentPresenter.setView(this);
-        MoviesAdapter=new MoviesAdapter(topRatedFragmentPresenter.getMoviesList(),R.layout.list_item_movie,context,this);
-        topRatedFragmentPresenter.retriveData();
+        baseFragmentPresenter=new TopRatedFragmentPresenter();
+        baseFragmentPresenter.setView(this);
+        MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(),R.layout.list_item_movie,context,this);
+        baseFragmentPresenter.retriveData();
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_movies, container, false);
-
-        DiscreteScrollView recyclerView = rootView.findViewById(R.id.movies_recycler_view);
-
-        recyclerView.setItemTransformer(new ScaleTransformer.Builder()
-                .setMinScale(0.8f)
-                .build());
-
-        recyclerView.setAdapter(MoviesAdapter);
-        recyclerView.scrollToPosition(5);
-        // Inflate the layout for this fragment
-        return rootView;
-    }
-
 
 
     @Override
@@ -74,8 +55,4 @@ public class TopRatedFragment extends BaseFragment implements MoviesAdapter.OnMo
         Toast.makeText(context,""+position,Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void updateView(ArrayList<Movie> movies) {
-        MoviesAdapter.notifyDataSetChanged();
-    }
 }

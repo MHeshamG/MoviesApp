@@ -22,10 +22,4 @@ public class PopularMoviesParser extends BaseParser {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(moviesResponseDisposableSingleObserver);
     }
-
-    @Override
-    public DisposableSingleObserver<MoviesResponse> getMoviesResponseObserver() {
-        Log.i(TAG,"getMoviesResponseObserver");
-        return super.getMoviesResponseObserver();
-    }
 }

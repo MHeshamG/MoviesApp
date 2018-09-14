@@ -19,11 +19,6 @@ public class UpComingMoviesParser extends BaseParser {
 
     private static final String TAG= UpComingMoviesParser.class.getSimpleName();
 
-    public UpComingMoviesParser()
-    {
-
-    }
-
     @Override
     public void fetchTopRatedMovies()
     {
@@ -31,11 +26,6 @@ public class UpComingMoviesParser extends BaseParser {
         moviesResponseSingleObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(moviesResponseDisposableSingleObserver);
-    }
-    @Override
-    public DisposableSingleObserver<MoviesResponse> getMoviesResponseObserver() {
-        Log.i(TAG,"getMoviesResponseObserver");
-        return super.getMoviesResponseObserver();
     }
 }
 

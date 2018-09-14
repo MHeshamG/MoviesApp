@@ -21,8 +21,6 @@ import java.util.ArrayList;
 
 public class UpComingFragment extends BaseFragment implements MoviesAdapter.OnMovieItemClickListener {
 
-    private UpComingFragmentPresenter upComingFragmentPresenter;
-
     public UpComingFragment() {
         // Required empty public constructor
     }
@@ -31,34 +29,12 @@ public class UpComingFragment extends BaseFragment implements MoviesAdapter.OnMo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context=getContext();
-        upComingFragmentPresenter=new UpComingFragmentPresenter();
-        upComingFragmentPresenter.setView(this);
-        MoviesAdapter=new MoviesAdapter(upComingFragmentPresenter.getMoviesList(),R.layout.list_item_movie,context,this);
-        upComingFragmentPresenter.retriveData();
+        baseFragmentPresenter=new UpComingFragmentPresenter();
+        baseFragmentPresenter.setView(this);
+        MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(),R.layout.list_item_movie,context,this);
+        baseFragmentPresenter.retriveData();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_movies, container, false);
-
-        DiscreteScrollView recyclerView = rootView.findViewById(R.id.movies_recycler_view);
-
-        recyclerView.setItemTransformer(new ScaleTransformer.Builder()
-                .setMinScale(0.8f)
-                .build());
-
-        recyclerView.setAdapter(MoviesAdapter);
-        recyclerView.scrollToPosition(5);
-
-        // Inflate the layout for this fragment
-        return rootView;
-    }
-
-    @Override
-    public void updateView(ArrayList<Movie> movies) {
-        MoviesAdapter.notifyDataSetChanged();
-    }
 
     @Override
     public void onMovieItemClick(int position) {

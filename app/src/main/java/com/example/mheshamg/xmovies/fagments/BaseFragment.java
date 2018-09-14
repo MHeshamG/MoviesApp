@@ -1,23 +1,61 @@
 package com.example.mheshamg.xmovies.fagments;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.mheshamg.xmovies.R;
 import com.example.mheshamg.xmovies.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.model.Movie;
+import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenter;
+import com.yarolegovich.discretescrollview.DiscreteScrollView;
+import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
 import java.util.ArrayList;
 
-public abstract class BaseFragment extends Fragment{
+public abstract class BaseFragment extends Fragment implements DiscreteScrollView.OnItemChangedListener<RecyclerView.ViewHolder>{
 
     protected Context context;
     protected RecyclerView recyclerView ;
     protected MoviesAdapter MoviesAdapter;
     protected ArrayList<Movie> movies;
+    protected BaseFragmentPresenter baseFragmentPresenter;
+
+    private TextView title;
+    private TextView rating;
+    private TextView popularity;
 
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_movies, container, false);
 
+        DiscreteScrollView recyclerView = rootView.findViewById(R.id.movies_recycler_view);
+        title=(TextView) rootView.findViewById(R.id.title);
+        rating=(TextView) rootView.findViewById(R.id.rating);
+        popularity=(TextView) rootView.findViewById(R.id.popularity);
+
+        recyclerView.setItemTransformer(new ScaleTransformer.Builder()
+                .setMinScale(0.8f)
+                .build());
+
+        recyclerView.setAdapter(MoviesAdapter);
+        recyclerView.addOnItemChangedListener(this);
+
+        return rootView;
+    }
+
+    public void updateView(ArrayList<Movie> movies) {
+        this.movies=movies;
+        MoviesAdapter.notifyDataSetChanged();
+    }
 
     @Override
     public void onAttach(Context activity) {
@@ -29,5 +67,10 @@ public abstract class BaseFragment extends Fragment{
         super.onDetach();
     }
 
-    public abstract void updateView(ArrayList<Movie>movies);
+    @Override
+    public void onCurrentItemChanged(@Nullable RecyclerView.ViewHolder viewHolder, int adapterPosition) {
+        title.setText(movies.get(adapterPosition).getTitle());
+        rating.setText(movies.get(adapterPosition).getVoteAverage().toString());
+        popularity.setText(""+movies.get(adapterPosition).getPopularity().intValue());
+    }
 }

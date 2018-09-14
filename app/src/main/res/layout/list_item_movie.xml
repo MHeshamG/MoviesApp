@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-   android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    >
+
 <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/tools"
@@ -28,6 +22,3 @@
         />
 
 </android.support.v7.widget.CardView>
-    <include
-        layout="@layout/movies_data_layout"/>
-</LinearLayout>

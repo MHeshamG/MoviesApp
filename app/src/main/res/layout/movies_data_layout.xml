@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,192 +7,166 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:fontFamily="sans-serif-light"
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         tools:text="Title" />
 
     <TextView
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintVertical_bias="0.059" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:fontFamily="sans-serif-light"
+        android:text="TextView" />
 
     <LinearLayout
         android:id="@+id/rating_linearLayout"
-        android:layout_width="59dp"
-        android:layout_height="19dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle"
-        app:layout_constraintVertical_bias="0.23000002">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/date_linearLayout"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/rating_image"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerInParent="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/star"
-            android:tint="@color/colorPrimaryDark" />
-
-
-        <TextView
-            android:id="@+id/rating"
+        <LinearLayout
+            android:id="@+id/rating_inner_linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:text="5.0"
-            android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/rating_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/star"
+                android:tint="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="0dp"
+                android:fontFamily="sans-serif-light"
+                android:text="5.0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/rating_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif-light"
+            android:text="Rating"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
     </LinearLayout>
 
 
     <LinearLayout
         android:id="@+id/popularity_linearLayout"
-        android:layout_width="59dp"
-        android:layout_height="19dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle"
-        app:layout_constraintVertical_bias="0.23000002">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/rating_linearLayout"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/popularity_image"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerInParent="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/popularity"
-            android:tint="@color/colorPrimaryDark" />
-
-
-        <TextView
-            android:id="@+id/popularity"
+        <LinearLayout
+            android:id="@+id/popularity_inner_linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:text="5.0"
-            android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/popularity_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/popularity"
+                android:tint="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/popularity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="3dp"
+                android:fontFamily="sans-serif-light"
+                android:text="5.0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/popularity_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="Popularity"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/date_linearLayout"
-        android:layout_width="59dp"
-        android:layout_height="19dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle"
-        app:layout_constraintVertical_bias="0.23000002">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="84dp"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/date_image"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerInParent="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/date"
-            android:tint="@color/colorPrimaryDark"
-           />
-
-
-        <TextView
-            android:id="@+id/date"
+        <LinearLayout
+            android:id="@+id/date_inner_linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:text="5.0"
-            android:textAppearance="@style/TextAppearance.AppCompat.Menu" />
+            android:layout_alignTop="@+id/rating_linearLayout"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/date_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/date"
+                android:tint="@color/colorPrimaryDark" />
+
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center_vertical"
+                android:text="5.0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/date_txt"
+            android:layout_width="83dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rating_linearLayout"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:fontFamily="sans-serif-light"
+            android:text="Release Date"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/rating_txt"
-        android:layout_width="65dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:gravity="center_horizontal"
-        android:text="Popularity"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/popularity_linearLayout"
-        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/popularity_txt"
-        android:layout_width="56dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:gravity="center_horizontal"
-        android:text="Rating"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/rating_txt"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rating_linearLayout"
-        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/date_txt"
-        android:layout_width="83dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:gravity="center_horizontal"
-        android:text="Release Date"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
-        app:layout_constraintStart_toEndOf="@+id/rating_txt"
-        app:layout_constraintTop_toBottomOf="@+id/date_linearLayout"
-        app:layout_constraintVertical_bias="0.0" />
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
