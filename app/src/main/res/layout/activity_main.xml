@@ -36,15 +36,26 @@
             </android.support.design.widget.AppBarLayout>
 
 
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="20dp"
+        android:background="@color/background"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:visibility="gone"/>
+<fragment
+    android:id="@+id/fragment_splash_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:name="com.example.mheshamg.xmovies.fagments.SplashFragment"
 
+    />
+</FrameLayout>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-           android:paddingTop="20dp"
-            android:background="@color/background"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
 
     </android.support.design.widget.CoordinatorLayout>
 
