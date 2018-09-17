@@ -14,6 +14,8 @@ import com.example.mheshamg.xmovies.R;
 import com.example.mheshamg.xmovies.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.model.Movie;
 import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenter;
+import com.example.mheshamg.xmovies.presenter.MainActivityPresenter;
+import com.example.mheshamg.xmovies.utils.DateFormater;
 import com.yarolegovich.discretescrollview.DiscreteScrollView;
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
@@ -26,10 +28,13 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
     protected MoviesAdapter MoviesAdapter;
     protected ArrayList<Movie> movies;
     protected BaseFragmentPresenter baseFragmentPresenter;
+    protected MainActivityPresenter mainActivityPresenter;
 
     private TextView title;
     private TextView rating;
     private TextView popularity;
+    private TextView date;
+
 
 
     @Override
@@ -57,6 +62,7 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
         MoviesAdapter.notifyDataSetChanged();
     }
 
+
     @Override
     public void onAttach(Context activity) {
         super.onAttach(activity);
@@ -72,5 +78,11 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
         title.setText(movies.get(adapterPosition).getTitle());
         rating.setText(movies.get(adapterPosition).getVoteAverage().toString());
         popularity.setText(""+movies.get(adapterPosition).getPopularity().intValue());
+        //date.setText();
+        DateFormater.parseDate(movies.get(adapterPosition).getReleaseDate());
+    }
+
+    public void setMainActivityPresenter(MainActivityPresenter mainActivityPresenter){
+        this.mainActivityPresenter=mainActivityPresenter;
     }
 }

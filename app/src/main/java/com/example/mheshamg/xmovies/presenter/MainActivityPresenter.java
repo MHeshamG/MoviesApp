@@ -54,8 +54,13 @@ public class MainActivityPresenter
             baseFragment=new PopularFragment();
             mMainActivityViewInterface.updateView(baseFragment);
         }
+        baseFragment.setMainActivityPresenter(this);
         return baseFragment;
 
+    }
+
+    public void proceedSplashScreen(){
+        mMainActivityViewInterface.proceedSplashScreen();
     }
 
     /**
@@ -65,5 +70,6 @@ public class MainActivityPresenter
     public interface MainActivityViewInterface
     {
         public void updateView (BaseFragment baseFragment);
+        public void proceedSplashScreen();
     }
 }

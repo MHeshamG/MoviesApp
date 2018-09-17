@@ -15,13 +15,16 @@ import io.reactivex.observers.DisposableObserver;
 public class BaseFragmentPresenterClass implements BaseFragmentPresenter {
 
     private static final String TAG=BaseFragmentPresenterClass.class.getSimpleName();
+    private MainActivityPresenter mainActivityPresenter;
 
     protected BaseFragment baseFragment;
     protected ArrayList<Movie> moviesList;
     protected BaseParser moviesParser;
 
-    public BaseFragmentPresenterClass() {
+
+    public BaseFragmentPresenterClass(MainActivityPresenter mainActivityPresenter) {
         moviesList=new ArrayList<>();
+        this.mainActivityPresenter=mainActivityPresenter;
     }
 
     @Override
@@ -48,7 +51,9 @@ public class BaseFragmentPresenterClass implements BaseFragmentPresenter {
             public void onNext(MoviesResponse moviesResponse) {
                 Log.i(TAG, moviesResponse.getResults().size() + "");
                 moviesList.addAll(moviesResponse.getResults());
+                Log.i(TAG,"Data recevied");
                 baseFragment.updateView(moviesList);
+                mainActivityPresenter.proceedSplashScreen();
             }
 
             @Override

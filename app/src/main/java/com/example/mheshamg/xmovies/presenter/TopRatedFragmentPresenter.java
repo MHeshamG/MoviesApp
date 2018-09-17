@@ -20,8 +20,9 @@ public class TopRatedFragmentPresenter extends BaseFragmentPresenterClass {
     //Network
     private DisposableObserver<MoviesResponse> topRatedMoviesDisposableObserver;
 
-    public TopRatedFragmentPresenter()
+    public TopRatedFragmentPresenter(MainActivityPresenter mainActivityPresenter)
     {
+        super(mainActivityPresenter);
         moviesParser=new TopRatedMoviesParser();
         topRatedMoviesDisposableObserver=createTopRatedMoviesDisposableSingleObserver();
         moviesParser.getMoviesResponsePublishSubject().subscribeWith(topRatedMoviesDisposableObserver);

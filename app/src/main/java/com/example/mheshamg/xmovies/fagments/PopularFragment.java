@@ -33,7 +33,7 @@ public class PopularFragment extends BaseFragment  implements MoviesAdapter.OnMo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context=getContext();
-        baseFragmentPresenter=new PopularFragmentPresenter();
+        baseFragmentPresenter=new PopularFragmentPresenter(mainActivityPresenter);
         baseFragmentPresenter.setView(this);
         MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(), R.layout.list_item_movie,context,this);
         baseFragmentPresenter.retriveData();

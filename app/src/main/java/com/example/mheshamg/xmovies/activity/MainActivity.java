@@ -1,6 +1,7 @@
 
 package com.example.mheshamg.xmovies.activity;
 
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -15,6 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.mheshamg.xmovies.R;
@@ -43,11 +46,16 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
     private FragmentDrawer drawerFragment;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private AppBarLayout appBarLayout;
+    private RelativeLayout splashScreenLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        appBarLayout=(AppBarLayout) findViewById(R.id.app_bar_layout);
+        splashScreenLayout= (RelativeLayout) findViewById(R.id.splash_screen);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -115,16 +123,23 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
     }
 
     @Override
+    public void proceedSplashScreen() {
+        splashScreenLayout.setVisibility(View.GONE);
+        appBarLayout.setVisibility(View.VISIBLE);
+        viewPager.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void onDrawerItemSelected(View view, int position) {
 
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(mainActivityPresenter.getFragment(TOP_RATED_FRAGMENT), "Top Rated");
+
         adapter.addFragment(mainActivityPresenter.getFragment(UPCOMING_FRAGMENT), "Up Coming");
+        adapter.addFragment(mainActivityPresenter.getFragment(TOP_RATED_FRAGMENT), "Top Rated");
         adapter.addFragment(mainActivityPresenter.getFragment(POPULAR_FRAGMENT), "Popular");
-       //adapter.addFragment(new ThreeFragment(), "THREE");
         viewPager.setAdapter(adapter);
     }
 

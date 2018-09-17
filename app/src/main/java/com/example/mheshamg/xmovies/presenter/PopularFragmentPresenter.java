@@ -20,8 +20,9 @@ public class PopularFragmentPresenter extends BaseFragmentPresenterClass{
 
     private DisposableObserver<MoviesResponse> popularMoviesDisposableObserver;
 
-    public PopularFragmentPresenter()
+    public PopularFragmentPresenter(MainActivityPresenter mainActivityPresenter)
     {
+        super(mainActivityPresenter);
         moviesParser=new PopularMoviesParser();
         popularMoviesDisposableObserver=createTopRatedMoviesDisposableSingleObserver();
         moviesParser.getMoviesResponsePublishSubject().subscribeWith(popularMoviesDisposableObserver);

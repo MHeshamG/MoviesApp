@@ -19,8 +19,9 @@ public class UpComingFragmentPresenter extends BaseFragmentPresenterClass {
     //Network
     private DisposableObserver<MoviesResponse> upComingMoviesDisposableObserver;
 
-    public UpComingFragmentPresenter()
+    public UpComingFragmentPresenter(MainActivityPresenter mainActivityPresenter)
     {
+        super(mainActivityPresenter);
         moviesParser=new UpComingMoviesParser();
         upComingMoviesDisposableObserver=createTopRatedMoviesDisposableSingleObserver();
         moviesParser.getMoviesResponsePublishSubject().subscribeWith(upComingMoviesDisposableObserver);
