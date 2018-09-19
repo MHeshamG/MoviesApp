@@ -1,14 +1,8 @@
 package com.example.mheshamg.xmovies.rest;
 
-import android.text.method.SingleLineTransformationMethod;
-
-import com.example.mheshamg.xmovies.model.Movie;
+import com.example.mheshamg.xmovies.model.MovieDetails;
 import com.example.mheshamg.xmovies.model.MoviesResponse;
-
-import java.util.List;
-
 import io.reactivex.Single;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -25,6 +19,6 @@ public interface ApiInterface {
     Single<MoviesResponse> getPopularMovies(@Query("api_key") String apiKey);
 
     @GET("movie/{id}")
-    Call<MoviesResponse> getMovieDetails(@Path("id") int id, @Query("api_key") String apiKey);
+    Single<MovieDetails> getMovieDetails(@Path("id") int id, @Query("api_key") String apiKey);
     //search/movie?api_key=134da0f4a51a36498831652090ad9aaf&query=hello
 }

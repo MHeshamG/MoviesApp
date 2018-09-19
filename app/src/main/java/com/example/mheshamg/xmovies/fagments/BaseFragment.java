@@ -95,7 +95,7 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
 
     @Override
     public void onClick(View view) {
-        Intent i=new Intent(getContext(), MovieDetailsActivity.class);
-        startActivity(i);
+        Intent detailsActiviyIntent=new Intent(getContext(), MovieDetailsActivity.class);
+        startActivity(detailsActiviyIntent);
     }
 }

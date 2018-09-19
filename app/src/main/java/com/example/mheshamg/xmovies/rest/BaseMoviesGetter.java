@@ -7,18 +7,22 @@ import com.example.mheshamg.xmovies.model.MoviesResponse;
 
 import java.util.ArrayList;
 
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
-public abstract class BaseParser {
+public abstract class BaseMoviesGetter {
 
-    private final static String TAG=BaseParser.class.getSimpleName();
+    private final static String TAG=BaseMoviesGetter.class.getSimpleName();
+
     protected ApiInterface apiService;
     protected DisposableSingleObserver<MoviesResponse> moviesResponseDisposableSingleObserver;
     protected ArrayList<Movie> moviesList;
     protected PublishSubject<MoviesResponse> moviesResponsePublishSubject;
 
-    public BaseParser()
+    public BaseMoviesGetter()
     {
         moviesResponseDisposableSingleObserver=getMoviesResponseObserver();
         apiService=ApiClient.getApiInterface();
@@ -45,5 +49,11 @@ public abstract class BaseParser {
                 Log.e(TAG,e.getMessage());
             }
         };
+    }
+
+    public void bindObserverToObservable(Single<MoviesResponse> moviesResponseSingleObservable){
+        moviesResponseSingleObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(moviesResponseDisposableSingleObserver);
     }
 }

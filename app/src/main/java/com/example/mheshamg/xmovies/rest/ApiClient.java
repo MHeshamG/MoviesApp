@@ -11,7 +11,7 @@ public class ApiClient {
     private static Retrofit retrofit=null;
     private static ApiInterface apiInterface=null;
 
-    public static Retrofit getClient() {
+    private static Retrofit getClient() {
         if(retrofit==null)
         {
             retrofit=new Retrofit.Builder()

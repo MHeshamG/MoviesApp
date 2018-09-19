@@ -5,8 +5,7 @@ import android.util.Log;
 import com.example.mheshamg.xmovies.fagments.BaseFragment;
 import com.example.mheshamg.xmovies.model.Movie;
 import com.example.mheshamg.xmovies.model.MoviesResponse;
-import com.example.mheshamg.xmovies.rest.BaseParser;
-import com.example.mheshamg.xmovies.rest.PopularMoviesParser;
+import com.example.mheshamg.xmovies.rest.BaseMoviesGetter;
 
 import java.util.ArrayList;
 
@@ -19,7 +18,7 @@ public class BaseFragmentPresenterClass implements BaseFragmentPresenter {
 
     protected BaseFragment baseFragment;
     protected ArrayList<Movie> moviesList;
-    protected BaseParser moviesParser;
+    protected BaseMoviesGetter moviesParser;
 
 
     public BaseFragmentPresenterClass(MainActivityPresenter mainActivityPresenter) {
