@@ -51,11 +51,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
      */
     private void bindMovieItemWithView(MovieViewHolder holder,int position)
     {
-       /* holder.movieTitle.setText(movies.get(position).getTitle());
-        holder.data.setText(movies.get(position).getReleaseDate());
-       // holder.movieDescription.setText(movies.get(position).getOverview());
-        holder.rating.setText(movies.get(position).getVoteAverage().toString());
-        holder.popularity.setText(movies.get(position).getPopularity().toString());*/
         holder.moviePosterDraweeView.setImageURI(Uri.parse("https://image.tmdb.org/t/p/original"+movies.get(position).getPosterPath()));
     }
 
@@ -69,24 +64,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
      *********************MovieHolder class********************************
      **********************************************************************/
     public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        LinearLayout moviesLayout;
-        TextView movieTitle;
-        TextView data;
-        TextView popularity;
-        TextView movieDescription;
-        TextView rating;
+
         SimpleDraweeView moviePosterDraweeView;
 
 
 
         public MovieViewHolder(View v) {
             super(v);
-            //moviesLayout = (LinearLayout) v.findViewById(R.id.movies_layout);
-           /* movieTitle = (TextView) v.findViewById(R.id.title);
-            data = (TextView) v.findViewById(R.id.subtitle);
-            popularity=(TextView) v.findViewById(R.id.popularity);
-          //  movieDescription = (TextView) v.findViewById(R.id.description);
-            rating = (TextView) v.findViewById(R.id.rating);*/
             moviePosterDraweeView=(SimpleDraweeView) v.findViewById(R.id.movie_poster_view);
             v.setOnClickListener(this);
         }

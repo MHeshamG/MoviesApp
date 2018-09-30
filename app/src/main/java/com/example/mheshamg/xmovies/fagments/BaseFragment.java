@@ -35,7 +35,6 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
 
     private TextView title;
     private TextView rating;
-    private TextView popularity;
     private TextView date;
     private TextView detailsButton;
 
@@ -49,7 +48,6 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
         DiscreteScrollView recyclerView = rootView.findViewById(R.id.movies_recycler_view);
         title=(TextView) rootView.findViewById(R.id.title);
         rating=(TextView) rootView.findViewById(R.id.rating);
-        popularity=(TextView) rootView.findViewById(R.id.popularity);
         date=(TextView) rootView.findViewById(R.id.subtitle);
         detailsButton=(TextView) rootView.findViewById(R.id.details_button);
         detailsButton.setOnClickListener(this);
@@ -84,7 +82,6 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
     public void onCurrentItemChanged(@Nullable RecyclerView.ViewHolder viewHolder, int adapterPosition) {
         title.setText(movies.get(adapterPosition).getTitle());
         rating.setText(movies.get(adapterPosition).getVoteAverage().toString());
-        popularity.setText(""+movies.get(adapterPosition).getPopularity().intValue());
         date.setText(DateFormater.changeFormat(movies.get(adapterPosition).getReleaseDate()));
 
     }

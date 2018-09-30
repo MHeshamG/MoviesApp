@@ -1,6 +1,8 @@
 
 package com.example.mheshamg.xmovies.activity;
 
+import android.animation.Animator;
+import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +18,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -27,6 +32,8 @@ import com.example.mheshamg.xmovies.fagments.FragmentDrawer;
 import com.example.mheshamg.xmovies.fagments.TopRatedFragment;
 import com.example.mheshamg.xmovies.presenter.MainActivityPresenter;
 import com.facebook.drawee.backends.pipeline.Fresco;
+
+import com.example.mheshamg.xmovies.adapter.ViewPagerAdapter;
 
 import static com.example.mheshamg.xmovies.fagments.FragmentsNames.POPULAR_FRAGMENT;
 import static com.example.mheshamg.xmovies.fagments.FragmentsNames.TOP_RATED_FRAGMENT;
@@ -48,11 +55,34 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
     private ViewPager viewPager;
     private AppBarLayout appBarLayout;
     private RelativeLayout splashScreenLayout;
+    private DrawerLayout rootLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        rootLayout=findViewById(R.id.drawer_layout);
+
+
+
+        if (savedInstanceState == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            rootLayout.setVisibility(View.INVISIBLE);
+
+            ViewTreeObserver viewTreeObserver = rootLayout.getViewTreeObserver();
+            if (viewTreeObserver.isAlive()) {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        revealActivity(rootLayout.getWidth()/2, rootLayout.getHeight()/2);
+                        rootLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
+            }
+        } else {
+            rootLayout.setVisibility(View.VISIBLE);
+        }
+
 
         appBarLayout=(AppBarLayout) findViewById(R.id.app_bar_layout);
         splashScreenLayout= (RelativeLayout) findViewById(R.id.splash_screen);
@@ -79,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
 
     }
 
@@ -124,9 +153,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
 
     @Override
     public void proceedSplashScreen() {
-        splashScreenLayout.setVisibility(View.GONE);
+        /*splashScreenLayout.setVisibility(View.GONE);
         appBarLayout.setVisibility(View.VISIBLE);
-        viewPager.setVisibility(View.VISIBLE);
+        viewPager.setVisibility(View.VISIBLE);*/
     }
 
     @Override
@@ -143,33 +172,17 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
         viewPager.setAdapter(adapter);
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
+    protected void revealActivity(int x, int y) {
+            float finalRadius = (float) (Math.max(rootLayout.getWidth(), rootLayout.getHeight()) * 1.1);
 
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
+            // create the animator for this view (the start radius is zero)
+            Animator circularReveal = ViewAnimationUtils.createCircularReveal(rootLayout, x, y, 0, finalRadius);
+            circularReveal.setDuration(500);
+            circularReveal.setInterpolator(new AccelerateInterpolator());
 
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
+            // make the view visible and start the animation
+            rootLayout.setVisibility(View.VISIBLE);
+            circularReveal.start();
     }
 
 }
