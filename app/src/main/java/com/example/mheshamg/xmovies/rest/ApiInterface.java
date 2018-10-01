@@ -19,6 +19,6 @@ public interface ApiInterface {
     Single<MoviesResponse> getPopularMovies(@Query("api_key") String apiKey);
 
     @GET("movie/{id}")
-    Single<MovieDetails> getMovieDetails(@Path("id") int id, @Query("api_key") String apiKey);
+    Single<MovieDetails> getMovieDetails(@Path("id") long id, @Query("api_key") String apiKey);
     //search/movie?api_key=134da0f4a51a36498831652090ad9aaf&query=hello
 }

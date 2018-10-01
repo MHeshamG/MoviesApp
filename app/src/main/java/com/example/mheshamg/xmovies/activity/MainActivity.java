@@ -2,6 +2,8 @@
 package com.example.mheshamg.xmovies.activity;
 
 import android.animation.Animator;
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
     private AppBarLayout appBarLayout;
     private RelativeLayout splashScreenLayout;
     private DrawerLayout rootLayout;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +120,32 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.action_search)
+                .getActionView();
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        // listening to search query text change
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // filter recycler view when query submitted
+                Toast.makeText(MainActivity.this,query,Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                // filter recycler view when text is changed
+
+                return false;
+            }
+        });
+
         return true;
     }
 

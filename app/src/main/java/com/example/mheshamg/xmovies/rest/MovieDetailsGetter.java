@@ -20,19 +20,22 @@ public class MovieDetailsGetter {
 
     private final static String TAG=BaseMoviesGetter.class.getSimpleName();
 
+
     protected ApiInterface apiService;
     protected DisposableSingleObserver<MovieDetails> movieDetailsDisposableSingleObserver;
     protected PublishSubject<MovieDetails> movieDetailsPublishSubject;
+    private Single<MovieDetails> movieDetailsSingleObservable;
 
-    public MovieDetailsGetter()
+    public   MovieDetailsGetter()
     {
         movieDetailsDisposableSingleObserver=getMovieDetailsObserver();
         apiService=ApiClient.getApiInterface();
         movieDetailsPublishSubject= PublishSubject.create();
     }
 
-    public void getMovieDetails(int id){
-        Single<MovieDetails> movieDetailsSingleObservable=apiService.getMovieDetails(id,API_KEY);
+
+    public void getMovieDetails(Long id){
+        movieDetailsSingleObservable=apiService.getMovieDetails(id,API_KEY);
         bindObserverToObservable(movieDetailsSingleObservable);
     };
 
@@ -46,6 +49,7 @@ public class MovieDetailsGetter {
             @Override
             public void onSuccess(MovieDetails movieDetails) {
                 movieDetailsPublishSubject.onNext(movieDetails);
+                Log.i(TAG,movieDetails.getOriginalTitle());
             }
 
             @Override

@@ -19,7 +19,7 @@ public class MovieDetails {
     @SerializedName("homepage")
     private String homepage = null;
     @SerializedName("id")
-    private float id;
+    private Long id;
     @SerializedName("imdb_id")
     private String imdbId;
     @SerializedName("original_language")
@@ -80,7 +80,7 @@ public class MovieDetails {
         return homepage;
     }
 
-    public float getId() {
+    public Long getId() {
         return id;
     }
 
@@ -166,7 +166,7 @@ public class MovieDetails {
         this.homepage = homepage;
     }
 
-    public void setId(float id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

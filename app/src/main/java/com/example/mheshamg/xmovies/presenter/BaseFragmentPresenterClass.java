@@ -52,7 +52,7 @@ public class BaseFragmentPresenterClass implements BaseFragmentPresenter {
                 moviesList.addAll(moviesResponse.getResults());
                 Log.i(TAG,"Data recevied");
                 baseFragment.updateView(moviesList);
-                mainActivityPresenter.proceedSplashScreen();
+//                mainActivityPresenter.proceedSplashScreen();
             }
 
             @Override

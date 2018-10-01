@@ -38,6 +38,8 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
     private TextView date;
     private TextView detailsButton;
 
+    private long currentMovieId;
+
 
 
     @Override
@@ -80,6 +82,7 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
 
     @Override
     public void onCurrentItemChanged(@Nullable RecyclerView.ViewHolder viewHolder, int adapterPosition) {
+        currentMovieId=movies.get(adapterPosition).getId();
         title.setText(movies.get(adapterPosition).getTitle());
         rating.setText(movies.get(adapterPosition).getVoteAverage().toString());
         date.setText(DateFormater.changeFormat(movies.get(adapterPosition).getReleaseDate()));
@@ -93,6 +96,7 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
     @Override
     public void onClick(View view) {
         Intent detailsActiviyIntent=new Intent(getContext(), MovieDetailsActivity.class);
+        detailsActiviyIntent.putExtra("MovieId",currentMovieId);
         startActivity(detailsActiviyIntent);
     }
 }
