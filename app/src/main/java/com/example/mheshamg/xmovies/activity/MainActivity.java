@@ -3,7 +3,9 @@ package com.example.mheshamg.xmovies.activity;
 
 import android.animation.Animator;
 import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
@@ -126,22 +128,20 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
         searchView = (SearchView) menu.findItem(R.id.action_search)
                 .getActionView();
         searchView.setSearchableInfo(searchManager
-                .getSearchableInfo(getComponentName()));
+                .getSearchableInfo(new ComponentName(this,SearchActivity.class)));
         searchView.setMaxWidth(Integer.MAX_VALUE);
 
-        // listening to search query text change
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                // filter recycler view when query submitted
-                Toast.makeText(MainActivity.this,query,Toast.LENGTH_SHORT).show();
+            public boolean onQueryTextSubmit(String s) {
+                searchView.setQuery("",false);
+                searchView.clearFocus();
+                searchView.setIconified(true);
                 return false;
             }
 
             @Override
-            public boolean onQueryTextChange(String query) {
-                // filter recycler view when text is changed
-
+            public boolean onQueryTextChange(String s) {
                 return false;
             }
         });
@@ -158,7 +158,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
 
             //noinspection SimplifiableIfStatement
             case R.id.action_search:
-                Toast.makeText(this, "search", Toast.LENGTH_SHORT).show();
+                Intent searchActivityIntent=new Intent(MainActivity.this,SearchActivity.class);
+                startActivity(searchActivityIntent);
                 return true;
 
             case R.id.action_settings:
