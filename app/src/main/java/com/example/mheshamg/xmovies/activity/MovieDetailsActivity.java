@@ -42,9 +42,11 @@ public class MovieDetailsActivity extends AppCompatActivity implements MovieDeta
         Intent openingIntent=getIntent();
         if(openingIntent!=null){
             movieId=openingIntent.getLongExtra("MovieId",-1);
+            Log.i("zzz",""+movieId);
+            movieDetailsActivityPresenter=new MovieDetailsActivityPresenter(this,movieId);
         }
 
-        movieDetailsActivityPresenter=new MovieDetailsActivityPresenter(this,movieId);
+
 
 
         movieTitle=findViewById(R.id.movie_details_title);

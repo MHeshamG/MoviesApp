@@ -108,7 +108,7 @@ public class MovieDetails {
         return posterPath;
     }
 
-    public String getreleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 

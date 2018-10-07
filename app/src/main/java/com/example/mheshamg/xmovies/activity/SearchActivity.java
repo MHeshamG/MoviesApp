@@ -2,22 +2,47 @@ package com.example.mheshamg.xmovies.activity;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.mheshamg.xmovies.R;
+import com.example.mheshamg.xmovies.adapter.MoviesAdapter;
+import com.example.mheshamg.xmovies.model.Movie;
+import com.example.mheshamg.xmovies.model.MovieDetails;
+import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenter;
 import com.example.mheshamg.xmovies.presenter.MovieDetailsActivityPresenter;
 import com.example.mheshamg.xmovies.presenter.SearchActivityPresenter;
+import com.example.mheshamg.xmovies.utils.DateFormater;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.yarolegovich.discretescrollview.DiscreteScrollView;
+import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
-public class SearchActivity extends AppCompatActivity  implements SearchActivityPresenter.SearchViewInterface{
+import java.util.ArrayList;
+
+public class SearchActivity extends AppCompatActivity  implements MoviesAdapter.OnMovieItemClickListener,SearchActivityPresenter.SearchViewInterface , DiscreteScrollView.OnItemChangedListener<RecyclerView.ViewHolder>,View.OnClickListener{
 
     private Toolbar mToolbar;
     ActionBar actionBar;
     private SearchActivityPresenter searchActivityPresenter;
+
+    protected RecyclerView recyclerView ;
+    protected MoviesAdapter moviesAdapter;
+    protected ArrayList<Movie> movies;
+
+    private TextView title;
+    private TextView rating;
+    private TextView date;
+    private TextView detailsButton;
+
+    private long currentMovieId;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +61,46 @@ public class SearchActivity extends AppCompatActivity  implements SearchActivity
             searchActivityPresenter=new SearchActivityPresenter(this);
             searchActivityPresenter.retriveData(query);
         }
+
+        moviesAdapter=new MoviesAdapter(searchActivityPresenter.getMoviesList(), R.layout.list_item_movie,this,this);
+        DiscreteScrollView recyclerView = findViewById(R.id.movies_recycler_view);
+        title=(TextView) findViewById(R.id.title);
+        rating=(TextView) findViewById(R.id.rating);
+        date=(TextView) findViewById(R.id.subtitle);
+        detailsButton=(TextView) findViewById(R.id.details_button);
+        detailsButton.setOnClickListener(this);
+
+        recyclerView.setItemTransformer(new ScaleTransformer.Builder()
+                .setMinScale(0.8f)
+                .build());
+
+        recyclerView.setAdapter(moviesAdapter);
+        recyclerView.addOnItemChangedListener(this);
     }
 
     @Override
-    public void updateView() {
+    public void updateView(ArrayList<Movie> movies) {
+        this.movies=movies;
+        moviesAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public void onCurrentItemChanged(@Nullable RecyclerView.ViewHolder viewHolder, int adapterPosition) {
+        if (movies.size()>0) {
+            currentMovieId = movies.get(adapterPosition).getId();
+            title.setText(movies.get(adapterPosition).getTitle());
+            rating.setText("" + movies.get(adapterPosition).getVoteAverage());
+            date.setText(DateFormater.changeFormat(movies.get(adapterPosition).getReleaseDate()));
+        }
+    }
+
+    @Override
+    public void onMovieItemClick(int position) {
 
     }
 }

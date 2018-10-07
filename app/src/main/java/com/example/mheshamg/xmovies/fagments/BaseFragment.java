@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,21 +27,27 @@ import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
 import java.util.ArrayList;
 
+import static android.support.constraint.Constraints.TAG;
+
 public abstract class BaseFragment extends Fragment implements DiscreteScrollView.OnItemChangedListener<RecyclerView.ViewHolder>,View.OnClickListener{
 
     protected Context context;
-    protected RecyclerView recyclerView ;
     protected MoviesAdapter MoviesAdapter;
     protected ArrayList<Movie> movies;
     protected BaseFragmentPresenter baseFragmentPresenter;
     protected MainActivityPresenter mainActivityPresenter;
 
+    private ProgressBar loadingProgressBar;
+    private DiscreteScrollView recyclerView;
+    private RelativeLayout dataRelativeLayout;
     private TextView title;
     private TextView rating;
     private TextView date;
     private TextView detailsButton;
 
     private long currentMovieId;
+
+    private boolean created=false;
 
 
 
@@ -47,7 +56,9 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_movies, container, false);
 
-        DiscreteScrollView recyclerView = rootView.findViewById(R.id.movies_recycler_view);
+        loadingProgressBar=rootView.findViewById(R.id.loading_progress_bar);
+        recyclerView = rootView.findViewById(R.id.movies_recycler_view);
+        dataRelativeLayout=rootView.findViewById(R.id.movie_data_main_activity);
         title=(TextView) rootView.findViewById(R.id.title);
         rating=(TextView) rootView.findViewById(R.id.rating);
         date=(TextView) rootView.findViewById(R.id.subtitle);
@@ -61,12 +72,23 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
         recyclerView.setAdapter(MoviesAdapter);
         recyclerView.addOnItemChangedListener(this);
 
+        if(created)
+            showViews();
+
         return rootView;
     }
 
     public void updateView(ArrayList<Movie> movies) {
         this.movies=movies;
         MoviesAdapter.notifyDataSetChanged();
+        showViews();
+    }
+
+    private void showViews() {
+        loadingProgressBar.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+        dataRelativeLayout.setVisibility(View.VISIBLE);
+        created=true;
     }
 
 

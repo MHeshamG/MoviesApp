@@ -45,7 +45,7 @@ public class SearchActivityPresenter {
                 Log.i(TAG, moviesResponse.getResults().size() + "");
                 moviesList.addAll(moviesResponse.getResults());
                 Log.i(TAG,"Data recevied");
-               // searchActivity.updateView();
+               searchActivity.updateView(moviesList);
             }
 
             @Override
@@ -61,6 +61,6 @@ public class SearchActivityPresenter {
     }
 
     public interface SearchViewInterface{
-        public void updateView();
+        public void updateView(ArrayList<Movie> movies);
     }
 }
