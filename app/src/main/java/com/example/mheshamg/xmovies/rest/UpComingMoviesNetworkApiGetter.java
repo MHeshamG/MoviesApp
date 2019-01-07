@@ -6,12 +6,12 @@ import io.reactivex.Single;
 
 import static com.example.mheshamg.xmovies.rest.Constants.API_KEY;
 
-public class UpComingMoviesGetter extends BaseMoviesGetter {
+public class UpComingMoviesNetworkApiGetter extends BaseMoviesNetworkApiGetter {
 
-    private static final String TAG= UpComingMoviesGetter.class.getSimpleName();
+    private static final String TAG= UpComingMoviesNetworkApiGetter.class.getSimpleName();
 
     @Override
-    public void fetchTopRatedMovies()
+    public void getMovies()
     {
         Single<MoviesResponse> moviesResponseSingleObservable = apiService.getUpComingMovies(API_KEY);
         bindObserverToObservable(moviesResponseSingleObservable);

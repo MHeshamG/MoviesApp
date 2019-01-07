@@ -59,10 +59,6 @@ public class MainActivityPresenter
 
     }
 
-    public void proceedSplashScreen(){
-        mMainActivityViewInterface.proceedSplashScreen();
-    }
-
     /**
      *
      *
@@ -70,6 +66,5 @@ public class MainActivityPresenter
     public interface MainActivityViewInterface
     {
         public void updateView (BaseFragment baseFragment);
-        public void proceedSplashScreen();
     }
 }

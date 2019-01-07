@@ -26,14 +26,15 @@ import com.yarolegovich.discretescrollview.DiscreteScrollView;
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
 
-public abstract class BaseFragment extends Fragment implements DiscreteScrollView.OnItemChangedListener<RecyclerView.ViewHolder>,View.OnClickListener{
+public abstract class BaseFragment extends Fragment implements DiscreteScrollView.OnItemChangedListener<RecyclerView.ViewHolder>{
 
     protected Context context;
     protected MoviesAdapter MoviesAdapter;
-    protected ArrayList<Movie> movies;
+    protected List<Movie> movies;
     protected BaseFragmentPresenter baseFragmentPresenter;
     protected MainActivityPresenter mainActivityPresenter;
 
@@ -43,11 +44,16 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
     private TextView title;
     private TextView rating;
     private TextView date;
-    private TextView detailsButton;
-
-    private long currentMovieId;
 
     private boolean created=false;
+    protected MoviesAdapter.OnMovieItemClickListener onMovieItemClickListener = new MoviesAdapter.OnMovieItemClickListener() {
+        @Override
+        public void onMovieItemClick(int position) {
+            Intent detailsActiviyIntent=new Intent(getContext(), MovieDetailsActivity.class);
+            detailsActiviyIntent.putExtra("Movie",movies.get(position));
+            startActivity(detailsActiviyIntent);
+        }
+    };
 
 
 
@@ -62,8 +68,6 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
         title=(TextView) rootView.findViewById(R.id.title);
         rating=(TextView) rootView.findViewById(R.id.rating);
         date=(TextView) rootView.findViewById(R.id.subtitle);
-        detailsButton=(TextView) rootView.findViewById(R.id.details_button);
-        detailsButton.setOnClickListener(this);
 
         recyclerView.setItemTransformer(new ScaleTransformer.Builder()
                 .setMinScale(0.8f)
@@ -78,7 +82,7 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
         return rootView;
     }
 
-    public void updateView(ArrayList<Movie> movies) {
+    public void updateView(List<Movie> movies) {
         this.movies=movies;
         MoviesAdapter.notifyDataSetChanged();
         showViews();
@@ -93,32 +97,15 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
 
 
     @Override
-    public void onAttach(Context activity) {
-        super.onAttach(activity);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
-    @Override
     public void onCurrentItemChanged(@Nullable RecyclerView.ViewHolder viewHolder, int adapterPosition) {
-        currentMovieId=movies.get(adapterPosition).getId();
-        title.setText(movies.get(adapterPosition).getTitle());
-        rating.setText(movies.get(adapterPosition).getVoteAverage().toString());
-        date.setText(DateFormater.changeFormat(movies.get(adapterPosition).getReleaseDate()));
-
+        if(adapterPosition>=0){
+            title.setText(movies.get(adapterPosition).getTitle());
+            rating.setText(movies.get(adapterPosition).getVoteAverage().toString());
+            date.setText(DateFormater.changeFormat(movies.get(adapterPosition).getReleaseDate()));
+        }
     }
 
     public void setMainActivityPresenter(MainActivityPresenter mainActivityPresenter){
         this.mainActivityPresenter=mainActivityPresenter;
-    }
-
-    @Override
-    public void onClick(View view) {
-        Intent detailsActiviyIntent=new Intent(getContext(), MovieDetailsActivity.class);
-        detailsActiviyIntent.putExtra("MovieId",currentMovieId);
-        startActivity(detailsActiviyIntent);
     }
 }

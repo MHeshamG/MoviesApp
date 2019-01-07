@@ -29,7 +29,7 @@ import java.util.ArrayList;
  * Use the  factory method to
  * create an instance of this fragment.
  */
-public class TopRatedFragment extends BaseFragment implements MoviesAdapter.OnMovieItemClickListener {
+public class TopRatedFragment extends BaseFragment {
 
     private static final String TAG=TopRatedFragment.class.getSimpleName();
 
@@ -45,14 +45,7 @@ public class TopRatedFragment extends BaseFragment implements MoviesAdapter.OnMo
         context=getContext();
         baseFragmentPresenter=new TopRatedFragmentPresenter(mainActivityPresenter);
         baseFragmentPresenter.setView(this);
-        MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(),R.layout.list_item_movie,context,this);
+        MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(),R.layout.list_item_movie,context,onMovieItemClickListener);
         baseFragmentPresenter.retriveData();
     }
-
-
-    @Override
-    public void onMovieItemClick(int position) {
-        Toast.makeText(context,""+position,Toast.LENGTH_SHORT).show();
-    }
-
 }

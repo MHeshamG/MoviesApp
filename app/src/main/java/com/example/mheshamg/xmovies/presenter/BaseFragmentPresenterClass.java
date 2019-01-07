@@ -2,12 +2,15 @@ package com.example.mheshamg.xmovies.presenter;
 
 import android.util.Log;
 
+import com.example.mheshamg.xmovies.MoviesGetter;
+import com.example.mheshamg.xmovies.MoviesObserver;
 import com.example.mheshamg.xmovies.fagments.BaseFragment;
 import com.example.mheshamg.xmovies.model.Movie;
 import com.example.mheshamg.xmovies.model.MoviesResponse;
-import com.example.mheshamg.xmovies.rest.BaseMoviesGetter;
+import com.example.mheshamg.xmovies.rest.BaseMoviesNetworkApiGetter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.observers.DisposableObserver;
 
@@ -18,7 +21,7 @@ public class BaseFragmentPresenterClass implements BaseFragmentPresenter {
 
     protected BaseFragment baseFragment;
     protected ArrayList<Movie> moviesList;
-    protected BaseMoviesGetter moviesParser;
+    protected MoviesGetter moviesParser;
 
 
     public BaseFragmentPresenterClass(MainActivityPresenter mainActivityPresenter) {
@@ -35,7 +38,15 @@ public class BaseFragmentPresenterClass implements BaseFragmentPresenter {
 
     @Override
     public void retriveData() {
-        moviesParser.fetchTopRatedMovies();
+        moviesParser.registerObserver(new MoviesObserver() {
+            @Override
+            public void moviesRetrived(List<Movie> movies) {
+                Log.i("xxx",movies.get(0).getTitle());
+                moviesList.addAll(movies);
+                baseFragment.updateView(movies);
+            }
+        });
+        moviesParser.getMovies();
     }
 
     @Override
@@ -43,27 +54,4 @@ public class BaseFragmentPresenterClass implements BaseFragmentPresenter {
         return moviesList;
     }
 
-    public DisposableObserver<MoviesResponse> createTopRatedMoviesDisposableSingleObserver() {
-        return new DisposableObserver<MoviesResponse>() {
-
-            @Override
-            public void onNext(MoviesResponse moviesResponse) {
-                Log.i(TAG, moviesResponse.getResults().size() + "");
-                moviesList.addAll(moviesResponse.getResults());
-                Log.i(TAG,"Data recevied");
-                baseFragment.updateView(moviesList);
-//                mainActivityPresenter.proceedSplashScreen();
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e(TAG, e.getMessage());
-            }
-
-            @Override
-            public void onComplete() {
-                Log.i(TAG, "completed");
-            }
-        };
-    }
 }

@@ -2,10 +2,15 @@ package com.example.mheshamg.xmovies.rest;
 
 import android.util.Log;
 
+import com.example.mheshamg.xmovies.BaseMoviesSubject;
+import com.example.mheshamg.xmovies.MovieSubject;
+import com.example.mheshamg.xmovies.MoviesObserver;
+import com.example.mheshamg.xmovies.MoviesGetter;
 import com.example.mheshamg.xmovies.model.Movie;
 import com.example.mheshamg.xmovies.model.MoviesResponse;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -13,35 +18,30 @@ import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
-public abstract class BaseMoviesGetter {
+public abstract class BaseMoviesNetworkApiGetter implements MoviesGetter {
 
-    private final static String TAG=BaseMoviesGetter.class.getSimpleName();
+    private final static String TAG=BaseMoviesNetworkApiGetter.class.getSimpleName();
 
     protected ApiInterface apiService;
     protected DisposableSingleObserver<MoviesResponse> moviesResponseDisposableSingleObserver;
-    protected ArrayList<Movie> moviesList;
-    protected PublishSubject<MoviesResponse> moviesResponsePublishSubject;
+    private MovieSubject movieSubject;
 
-    public BaseMoviesGetter()
+    public BaseMoviesNetworkApiGetter()
     {
         moviesResponseDisposableSingleObserver=getMoviesResponseObserver();
         apiService=ApiClient.getApiInterface();
-        moviesResponsePublishSubject= PublishSubject.create();
+        movieSubject = new BaseMoviesSubject();
     }
 
-    public abstract void fetchTopRatedMovies();
+    public abstract void getMovies();
 
-    public PublishSubject<MoviesResponse> getMoviesResponsePublishSubject() {
-        return moviesResponsePublishSubject;
-    }
 
     public DisposableSingleObserver<MoviesResponse> getMoviesResponseObserver()
     {
         return new DisposableSingleObserver<MoviesResponse>() {
             @Override
             public void onSuccess(MoviesResponse moviesResponse) {
-                Log.i(TAG,moviesResponse.getResults().size()+"");
-                moviesResponsePublishSubject.onNext(moviesResponse);
+                notifyObservers(moviesResponse.getResults());
             }
 
             @Override
@@ -55,5 +55,15 @@ public abstract class BaseMoviesGetter {
         moviesResponseSingleObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(moviesResponseDisposableSingleObserver);
+    }
+
+    @Override
+    public void registerObserver(MoviesObserver moviesObserver){
+        movieSubject.registerObserver(moviesObserver);
+    }
+
+    @Override
+    public void notifyObservers(List<Movie> movies){
+        movieSubject.notifyObservers(movies);
     }
 }

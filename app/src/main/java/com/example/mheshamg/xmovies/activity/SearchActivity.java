@@ -8,24 +8,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.TextView;
 
 import com.example.mheshamg.xmovies.R;
 import com.example.mheshamg.xmovies.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.model.Movie;
-import com.example.mheshamg.xmovies.model.MovieDetails;
-import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenter;
-import com.example.mheshamg.xmovies.presenter.MovieDetailsActivityPresenter;
 import com.example.mheshamg.xmovies.presenter.SearchActivityPresenter;
 import com.example.mheshamg.xmovies.utils.DateFormater;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.yarolegovich.discretescrollview.DiscreteScrollView;
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
 import java.util.ArrayList;
 
-public class SearchActivity extends AppCompatActivity  implements MoviesAdapter.OnMovieItemClickListener,SearchActivityPresenter.SearchViewInterface , DiscreteScrollView.OnItemChangedListener<RecyclerView.ViewHolder>,View.OnClickListener{
+public class SearchActivity extends AppCompatActivity  implements MoviesAdapter.OnMovieItemClickListener,SearchActivityPresenter.SearchViewInterface , DiscreteScrollView.OnItemChangedListener<RecyclerView.ViewHolder>{
 
     private Toolbar mToolbar;
     ActionBar actionBar;
@@ -67,8 +62,6 @@ public class SearchActivity extends AppCompatActivity  implements MoviesAdapter.
         title=(TextView) findViewById(R.id.title);
         rating=(TextView) findViewById(R.id.rating);
         date=(TextView) findViewById(R.id.subtitle);
-        detailsButton=(TextView) findViewById(R.id.details_button);
-        detailsButton.setOnClickListener(this);
 
         recyclerView.setItemTransformer(new ScaleTransformer.Builder()
                 .setMinScale(0.8f)
@@ -82,11 +75,6 @@ public class SearchActivity extends AppCompatActivity  implements MoviesAdapter.
     public void updateView(ArrayList<Movie> movies) {
         this.movies=movies;
         moviesAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onClick(View view) {
-
     }
 
     @Override

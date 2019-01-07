@@ -6,9 +6,9 @@ import io.reactivex.Single;
 
 import static com.example.mheshamg.xmovies.rest.Constants.API_KEY;
 
-public class SearchMovieGetter extends BaseMoviesGetter {
+public class SearchMovieNetworkApiGetter extends BaseMoviesNetworkApiGetter {
 
-    private static final String TAG= SearchMovieGetter.class.getSimpleName();
+    private static final String TAG= SearchMovieNetworkApiGetter.class.getSimpleName();
     private String query;
 
     public void setQuery(String query){
@@ -16,7 +16,7 @@ public class SearchMovieGetter extends BaseMoviesGetter {
     }
 
     @Override
-    public void fetchTopRatedMovies() {
+    public void getMovies() {
         Single<MoviesResponse> moviesResponseSingleObservable = apiService.searchForMovie(API_KEY,query);
         bindObserverToObservable(moviesResponseSingleObservable);
     }

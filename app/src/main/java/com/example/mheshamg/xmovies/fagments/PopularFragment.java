@@ -1,5 +1,6 @@
 package com.example.mheshamg.xmovies.fagments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mheshamg.xmovies.R;
+import com.example.mheshamg.xmovies.activity.MovieDetailsActivity;
 import com.example.mheshamg.xmovies.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.model.Movie;
 import com.example.mheshamg.xmovies.presenter.PopularFragmentPresenter;
@@ -35,7 +37,7 @@ public class PopularFragment extends BaseFragment  implements MoviesAdapter.OnMo
         context=getContext();
         baseFragmentPresenter=new PopularFragmentPresenter(mainActivityPresenter);
         baseFragmentPresenter.setView(this);
-        MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(), R.layout.list_item_movie,context,this);
+        MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(), R.layout.list_item_movie,context,onMovieItemClickListener);
         baseFragmentPresenter.retriveData();
     }
 

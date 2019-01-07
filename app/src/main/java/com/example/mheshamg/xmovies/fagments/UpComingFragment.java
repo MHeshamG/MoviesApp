@@ -31,7 +31,7 @@ public class UpComingFragment extends BaseFragment implements MoviesAdapter.OnMo
         context=getContext();
         baseFragmentPresenter=new UpComingFragmentPresenter(mainActivityPresenter);
         baseFragmentPresenter.setView(this);
-        MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(),R.layout.list_item_movie,context,this);
+        MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(),R.layout.list_item_movie,context,onMovieItemClickListener);
         baseFragmentPresenter.retriveData();
     }
 
