@@ -33,14 +33,13 @@ public abstract class BaseMoviesNetworkApiGetter implements MoviesGetter {
         movieSubject = new BaseMoviesSubject();
     }
 
-    public abstract void getMovies();
-
 
     public DisposableSingleObserver<MoviesResponse> getMoviesResponseObserver()
     {
         return new DisposableSingleObserver<MoviesResponse>() {
             @Override
             public void onSuccess(MoviesResponse moviesResponse) {
+                Log.d("hhh",""+moviesResponse.getResults().size());
                 notifyObservers(moviesResponse.getResults());
             }
 

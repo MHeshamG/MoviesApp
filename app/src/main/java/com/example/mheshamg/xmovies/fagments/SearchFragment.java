@@ -5,11 +5,12 @@ import android.os.Bundle;
 import com.example.mheshamg.xmovies.R;
 import com.example.mheshamg.xmovies.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenterClass;
-import com.example.mheshamg.xmovies.rest.PopularMoviesNetworkApiGetter;
+import com.example.mheshamg.xmovies.rest.SearchMoviesNetworkApiGetter;
 
-public class PopularFragment extends BaseFragment  implements MoviesAdapter.OnMovieItemClickListener {
 
-    public PopularFragment() {
+public class SearchFragment extends BaseFragment {
+
+    public SearchFragment() {
         // Required empty public constructor
     }
 
@@ -18,14 +19,9 @@ public class PopularFragment extends BaseFragment  implements MoviesAdapter.OnMo
         super.onCreate(savedInstanceState);
         context=getContext();
         baseFragmentPresenter=new BaseFragmentPresenterClass();
-        baseFragmentPresenter.setMoviesGetter(new PopularMoviesNetworkApiGetter());
+        baseFragmentPresenter.setMoviesGetter(new SearchMoviesNetworkApiGetter());
         baseFragmentPresenter.setView(this);
         MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(), R.layout.list_item_movie,context,onMovieItemClickListener);
-        baseFragmentPresenter.retriveData("none");
-    }
-
-    @Override
-    public void onMovieItemClick(int position) {
-
+        super.onCreate(savedInstanceState);
     }
 }

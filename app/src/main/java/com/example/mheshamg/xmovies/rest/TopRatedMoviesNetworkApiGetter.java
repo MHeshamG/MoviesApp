@@ -12,7 +12,7 @@ public class TopRatedMoviesNetworkApiGetter extends BaseMoviesNetworkApiGetter {
     private static final String TAG= TopRatedMoviesNetworkApiGetter.class.getSimpleName();
 
     @Override
-    public void getMovies()
+    public void getMovies(String query)
     {
         Single<MoviesResponse> moviesResponseSingleObservable = apiService.getTopRatedMovies(API_KEY);
         bindObserverToObservable(moviesResponseSingleObservable);

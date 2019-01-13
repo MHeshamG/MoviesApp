@@ -17,16 +17,14 @@ import io.reactivex.observers.DisposableObserver;
 public class BaseFragmentPresenterClass implements BaseFragmentPresenter {
 
     private static final String TAG=BaseFragmentPresenterClass.class.getSimpleName();
-    private MainActivityPresenter mainActivityPresenter;
 
     protected BaseFragment baseFragment;
     protected ArrayList<Movie> moviesList;
     protected MoviesGetter moviesParser;
 
 
-    public BaseFragmentPresenterClass(MainActivityPresenter mainActivityPresenter) {
+    public BaseFragmentPresenterClass() {
         moviesList=new ArrayList<>();
-        this.mainActivityPresenter=mainActivityPresenter;
     }
 
     @Override
@@ -37,7 +35,7 @@ public class BaseFragmentPresenterClass implements BaseFragmentPresenter {
 
 
     @Override
-    public void retriveData() {
+    public void retriveData(String query) {
         moviesParser.registerObserver(new MoviesObserver() {
             @Override
             public void moviesRetrived(List<Movie> movies) {
@@ -46,12 +44,17 @@ public class BaseFragmentPresenterClass implements BaseFragmentPresenter {
                 baseFragment.updateView(movies);
             }
         });
-        moviesParser.getMovies();
+        moviesParser.getMovies(query);
     }
 
     @Override
     public ArrayList<Movie> getMoviesList() {
         return moviesList;
+    }
+
+    @Override
+    public void setMoviesGetter(MoviesGetter moviesGetter) {
+        moviesParser = moviesGetter;
     }
 
 }

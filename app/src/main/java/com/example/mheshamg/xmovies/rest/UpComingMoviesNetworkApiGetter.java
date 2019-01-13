@@ -11,7 +11,7 @@ public class UpComingMoviesNetworkApiGetter extends BaseMoviesNetworkApiGetter {
     private static final String TAG= UpComingMoviesNetworkApiGetter.class.getSimpleName();
 
     @Override
-    public void getMovies()
+    public void getMovies(String query)
     {
         Single<MoviesResponse> moviesResponseSingleObservable = apiService.getUpComingMovies(API_KEY);
         bindObserverToObservable(moviesResponseSingleObservable);

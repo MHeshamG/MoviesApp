@@ -26,18 +26,12 @@ public class SearchActivity extends AppCompatActivity  implements MoviesAdapter.
     ActionBar actionBar;
     private SearchActivityPresenter searchActivityPresenter;
 
-    protected RecyclerView recyclerView ;
     protected MoviesAdapter moviesAdapter;
     protected ArrayList<Movie> movies;
 
     private TextView title;
     private TextView rating;
     private TextView date;
-    private TextView detailsButton;
-
-    private long currentMovieId;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +53,9 @@ public class SearchActivity extends AppCompatActivity  implements MoviesAdapter.
 
         moviesAdapter=new MoviesAdapter(searchActivityPresenter.getMoviesList(), R.layout.list_item_movie,this,this);
         DiscreteScrollView recyclerView = findViewById(R.id.movies_recycler_view);
-        title=(TextView) findViewById(R.id.title);
-        rating=(TextView) findViewById(R.id.rating);
-        date=(TextView) findViewById(R.id.subtitle);
+        title = findViewById(R.id.title);
+        rating = findViewById(R.id.rating);
+        date = findViewById(R.id.subtitle);
 
         recyclerView.setItemTransformer(new ScaleTransformer.Builder()
                 .setMinScale(0.8f)
@@ -80,7 +74,6 @@ public class SearchActivity extends AppCompatActivity  implements MoviesAdapter.
     @Override
     public void onCurrentItemChanged(@Nullable RecyclerView.ViewHolder viewHolder, int adapterPosition) {
         if (movies.size()>0) {
-            currentMovieId = movies.get(adapterPosition).getId();
             title.setText(movies.get(adapterPosition).getTitle());
             rating.setText("" + movies.get(adapterPosition).getVoteAverage());
             date.setText(DateFormater.changeFormat(movies.get(adapterPosition).getReleaseDate()));

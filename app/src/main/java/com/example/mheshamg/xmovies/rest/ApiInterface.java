@@ -17,8 +17,6 @@ public interface ApiInterface {
     @GET("movie/popular")
     Single<MoviesResponse> getPopularMovies(@Query("api_key") String apiKey);
 
-    //search/movie?api_key=134da0f4a51a36498831652090ad9aaf&query=hello
-
     @GET("search/movie/")
     Single<MoviesResponse> searchForMovie(@Query("api_key") String apiKey , @Query("query") String query);
 }

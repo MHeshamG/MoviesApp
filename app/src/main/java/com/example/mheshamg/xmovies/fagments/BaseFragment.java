@@ -36,7 +36,7 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
     protected MoviesAdapter MoviesAdapter;
     protected List<Movie> movies;
     protected BaseFragmentPresenter baseFragmentPresenter;
-    protected MainActivityPresenter mainActivityPresenter;
+    protected String query;
 
     private ProgressBar loadingProgressBar;
     private DiscreteScrollView recyclerView;
@@ -55,7 +55,15 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
         }
     };
 
+    public void setQuery(String query) {
+        this.query = query;
+    }
 
+   /* @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        baseFragmentPresenter.retriveData(query);
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -103,9 +111,5 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
             rating.setText(movies.get(adapterPosition).getVoteAverage().toString());
             date.setText(DateFormater.changeFormat(movies.get(adapterPosition).getReleaseDate()));
         }
-    }
-
-    public void setMainActivityPresenter(MainActivityPresenter mainActivityPresenter){
-        this.mainActivityPresenter=mainActivityPresenter;
     }
 }

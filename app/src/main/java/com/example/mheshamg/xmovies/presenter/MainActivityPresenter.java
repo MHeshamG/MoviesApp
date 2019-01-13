@@ -54,7 +54,6 @@ public class MainActivityPresenter
             baseFragment=new PopularFragment();
             mMainActivityViewInterface.updateView(baseFragment);
         }
-        baseFragment.setMainActivityPresenter(this);
         return baseFragment;
 
     }

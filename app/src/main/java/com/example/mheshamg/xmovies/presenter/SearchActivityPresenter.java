@@ -2,13 +2,13 @@ package com.example.mheshamg.xmovies.presenter;
 
 import android.util.Log;
 
+import com.example.mheshamg.xmovies.MoviesGetter;
+import com.example.mheshamg.xmovies.MoviesObserver;
 import com.example.mheshamg.xmovies.model.Movie;
-import com.example.mheshamg.xmovies.model.MoviesResponse;
-import com.example.mheshamg.xmovies.rest.SearchMovieNetworkApiGetter;
+import com.example.mheshamg.xmovies.rest.SearchMoviesNetworkApiGetter;
 
 import java.util.ArrayList;
-
-import io.reactivex.observers.DisposableObserver;
+import java.util.List;
 
 public class SearchActivityPresenter {
 
@@ -16,49 +16,32 @@ public class SearchActivityPresenter {
     private SearchViewInterface searchActivity;
 
     private ArrayList<Movie> moviesList;
-    protected SearchMovieNetworkApiGetter moviesGetter;
+    protected MoviesGetter moviesGetter;
 
 
     public SearchActivityPresenter(SearchViewInterface searchViewInterface) {
         moviesList=new ArrayList<>();
         searchActivity=searchViewInterface;
-        moviesGetter=new SearchMovieNetworkApiGetter();
-       // moviesGetter.getMoviesResponsePublishSubject().subscribeWith(createTopRatedMoviesDisposableSingleObserver());
+        moviesGetter=new SearchMoviesNetworkApiGetter();
     }
 
     public void retriveData(String query) {
-        moviesGetter.setQuery(query);
-       // moviesGetter.fetchMovies();
+        moviesGetter.registerObserver(new MoviesObserver() {
+            @Override
+            public void moviesRetrived(List<Movie> movies) {
+                Log.i("xxxz",movies.get(0).getTitle());
+                moviesList.addAll(movies);
+                searchActivity.updateView(moviesList);
+            }
+        });
+        moviesGetter.getMovies(query);
     }
 
     public ArrayList<Movie> getMoviesList() {
         return moviesList;
     }
 
-    public DisposableObserver<MoviesResponse> createTopRatedMoviesDisposableSingleObserver() {
-        return new DisposableObserver<MoviesResponse>() {
-
-            @Override
-            public void onNext(MoviesResponse moviesResponse) {
-                Log.i(TAG, moviesResponse.getResults().size() + "");
-                moviesList.addAll(moviesResponse.getResults());
-                Log.i(TAG,"Data recevied");
-               searchActivity.updateView(moviesList);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e(TAG, e.getMessage());
-            }
-
-            @Override
-            public void onComplete() {
-                Log.i(TAG, "completed");
-            }
-        };
-    }
-
     public interface SearchViewInterface{
-        public void updateView(ArrayList<Movie> movies);
+        void updateView(ArrayList<Movie> movies);
     }
 }

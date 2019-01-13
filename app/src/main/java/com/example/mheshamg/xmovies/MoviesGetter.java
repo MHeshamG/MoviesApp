@@ -5,5 +5,5 @@ import com.example.mheshamg.xmovies.model.Movie;
 import java.util.List;
 
 public interface MoviesGetter extends MovieSubject{
-    void getMovies();
+    void getMovies(String query);
 }

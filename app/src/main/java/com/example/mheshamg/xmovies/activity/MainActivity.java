@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private AppBarLayout appBarLayout;
-    private RelativeLayout splashScreenLayout;
+    //private RelativeLayout splashScreenLayout;
     private LinearLayout rootLayout;
     private SearchView searchView;
 
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
 
 
         appBarLayout=(AppBarLayout) findViewById(R.id.app_bar_layout);
-        splashScreenLayout= (RelativeLayout) findViewById(R.id.splash_screen);
+        //splashScreenLayout= (RelativeLayout) findViewById(R.id.splash_screen);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
