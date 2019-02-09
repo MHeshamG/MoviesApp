@@ -22,6 +22,6 @@ public class SearchFragment extends BaseFragment {
         baseFragmentPresenter.setMoviesGetter(new SearchMoviesNetworkApiGetter());
         baseFragmentPresenter.setView(this);
         MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(), R.layout.list_item_movie,context,onMovieItemClickListener);
-        super.onCreate(savedInstanceState);
+        baseFragmentPresenter.retriveData();
     }
 }

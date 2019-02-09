@@ -50,7 +50,7 @@ public abstract class BaseMoviesNetworkApiGetter implements MoviesGetter {
         };
     }
 
-    public void bindObserverToObservable(Single<MoviesResponse> moviesResponseSingleObservable){
+    protected void bindObserverToObservable(Single<MoviesResponse> moviesResponseSingleObservable){
         moviesResponseSingleObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(moviesResponseDisposableSingleObserver);
@@ -65,4 +65,5 @@ public abstract class BaseMoviesNetworkApiGetter implements MoviesGetter {
     public void notifyObservers(List<Movie> movies){
         movieSubject.notifyObservers(movies);
     }
+
 }

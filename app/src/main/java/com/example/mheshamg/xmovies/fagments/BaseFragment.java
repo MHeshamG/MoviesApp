@@ -59,11 +59,9 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
         this.query = query;
     }
 
-   /* @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        baseFragmentPresenter.retriveData(query);
-    }*/
+    public String getQuery() {
+        return query;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

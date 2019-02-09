@@ -7,7 +7,7 @@ import com.example.mheshamg.xmovies.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenterClass;
 import com.example.mheshamg.xmovies.rest.PopularMoviesNetworkApiGetter;
 
-public class PopularFragment extends BaseFragment  implements MoviesAdapter.OnMovieItemClickListener {
+public class PopularFragment extends BaseFragment {
 
     public PopularFragment() {
         // Required empty public constructor
@@ -21,11 +21,6 @@ public class PopularFragment extends BaseFragment  implements MoviesAdapter.OnMo
         baseFragmentPresenter.setMoviesGetter(new PopularMoviesNetworkApiGetter());
         baseFragmentPresenter.setView(this);
         MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(), R.layout.list_item_movie,context,onMovieItemClickListener);
-        baseFragmentPresenter.retriveData("none");
-    }
-
-    @Override
-    public void onMovieItemClick(int position) {
-
+        baseFragmentPresenter.retriveData();
     }
 }

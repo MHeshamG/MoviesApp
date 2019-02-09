@@ -6,7 +6,7 @@ import com.example.mheshamg.xmovies.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenterClass;
 import com.example.mheshamg.xmovies.rest.UpComingMoviesNetworkApiGetter;
 
-public class UpComingFragment extends BaseFragment implements MoviesAdapter.OnMovieItemClickListener {
+public class UpComingFragment extends BaseFragment {
 
     public UpComingFragment() {
         // Required empty public constructor
@@ -20,12 +20,6 @@ public class UpComingFragment extends BaseFragment implements MoviesAdapter.OnMo
         baseFragmentPresenter.setMoviesGetter(new UpComingMoviesNetworkApiGetter());
         baseFragmentPresenter.setView(this);
         MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(),R.layout.list_item_movie,context,onMovieItemClickListener);
-        baseFragmentPresenter.retriveData("none");
-    }
-
-
-    @Override
-    public void onMovieItemClick(int position) {
-
+        baseFragmentPresenter.retriveData();
     }
 }

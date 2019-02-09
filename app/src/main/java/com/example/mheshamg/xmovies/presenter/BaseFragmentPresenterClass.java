@@ -6,22 +6,17 @@ import com.example.mheshamg.xmovies.MoviesGetter;
 import com.example.mheshamg.xmovies.MoviesObserver;
 import com.example.mheshamg.xmovies.fagments.BaseFragment;
 import com.example.mheshamg.xmovies.model.Movie;
-import com.example.mheshamg.xmovies.model.MoviesResponse;
-import com.example.mheshamg.xmovies.rest.BaseMoviesNetworkApiGetter;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.observers.DisposableObserver;
 
 public class BaseFragmentPresenterClass implements BaseFragmentPresenter {
 
     private static final String TAG=BaseFragmentPresenterClass.class.getSimpleName();
+    private String query;
 
     protected BaseFragment baseFragment;
     protected ArrayList<Movie> moviesList;
     protected MoviesGetter moviesParser;
-
 
     public BaseFragmentPresenterClass() {
         moviesList=new ArrayList<>();
@@ -33,18 +28,16 @@ public class BaseFragmentPresenterClass implements BaseFragmentPresenter {
         this.baseFragment=baseFragment;
     }
 
-
     @Override
-    public void retriveData(String query) {
+    public void retriveData() {
         moviesParser.registerObserver(new MoviesObserver() {
             @Override
             public void moviesRetrived(List<Movie> movies) {
-                Log.i("xxx",movies.get(0).getTitle());
                 moviesList.addAll(movies);
                 baseFragment.updateView(movies);
             }
         });
-        moviesParser.getMovies(query);
+        moviesParser.getMovies(baseFragment.getQuery());
     }
 
     @Override
@@ -56,5 +49,4 @@ public class BaseFragmentPresenterClass implements BaseFragmentPresenter {
     public void setMoviesGetter(MoviesGetter moviesGetter) {
         moviesParser = moviesGetter;
     }
-
 }

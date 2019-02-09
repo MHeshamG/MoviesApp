@@ -9,9 +9,8 @@ import java.util.ArrayList;
 
 public interface BaseFragmentPresenter {
 
-     void retriveData(String query);
+     void retriveData();
      void setView(BaseFragment baseFragment);
      ArrayList<Movie> getMoviesList();
      void setMoviesGetter(MoviesGetter moviesGetter);
-
 }

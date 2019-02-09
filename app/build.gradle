@@ -48,4 +48,8 @@ dependencies {
 
     //
     implementation 'com.yarolegovich:discrete-scrollview:1.4.9'
+
+    //ButterKnife
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
 }
