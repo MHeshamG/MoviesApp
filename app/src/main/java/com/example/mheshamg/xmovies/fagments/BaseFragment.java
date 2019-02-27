@@ -6,37 +6,31 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mheshamg.xmovies.R;
 import com.example.mheshamg.xmovies.activity.MovieDetailsActivity;
 import com.example.mheshamg.xmovies.adapter.MoviesAdapter;
-import com.example.mheshamg.xmovies.model.Movie;
+import com.example.mheshamg.xmovies.model.Show;
 import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenter;
-import com.example.mheshamg.xmovies.presenter.MainActivityPresenter;
 import com.example.mheshamg.xmovies.utils.DateFormater;
 import com.yarolegovich.discretescrollview.DiscreteScrollView;
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static android.support.constraint.Constraints.TAG;
 
 public abstract class BaseFragment extends Fragment implements DiscreteScrollView.OnItemChangedListener<RecyclerView.ViewHolder>{
 
     protected Context context;
     protected MoviesAdapter MoviesAdapter;
-    protected List<Movie> movies;
+    protected List<Show> shows;
     protected BaseFragmentPresenter baseFragmentPresenter;
-    protected String query;
+
 
     private ProgressBar loadingProgressBar;
     private DiscreteScrollView recyclerView;
@@ -50,18 +44,10 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
         @Override
         public void onMovieItemClick(int position) {
             Intent detailsActiviyIntent=new Intent(getContext(), MovieDetailsActivity.class);
-            detailsActiviyIntent.putExtra("Movie",movies.get(position));
+            detailsActiviyIntent.putExtra("Show", shows.get(position));
             startActivity(detailsActiviyIntent);
         }
     };
-
-    public void setQuery(String query) {
-        this.query = query;
-    }
-
-    public String getQuery() {
-        return query;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,8 +74,8 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
         return rootView;
     }
 
-    public void updateView(List<Movie> movies) {
-        this.movies=movies;
+    public void updateView(List<Show> shows) {
+        this.shows = shows;
         MoviesAdapter.notifyDataSetChanged();
         showViews();
     }
@@ -105,9 +91,9 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
     @Override
     public void onCurrentItemChanged(@Nullable RecyclerView.ViewHolder viewHolder, int adapterPosition) {
         if(adapterPosition>=0){
-            title.setText(movies.get(adapterPosition).getTitle());
-            rating.setText(movies.get(adapterPosition).getVoteAverage().toString());
-            date.setText(DateFormater.changeFormat(movies.get(adapterPosition).getReleaseDate()));
+            title.setText(shows.get(adapterPosition).getTitle());
+            rating.setText(shows.get(adapterPosition).getVoteAverage().toString());
+            date.setText(DateFormater.changeFormat(shows.get(adapterPosition).getReleaseDate()));
         }
     }
 }

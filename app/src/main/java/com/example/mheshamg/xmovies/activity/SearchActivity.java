@@ -35,7 +35,7 @@ public class SearchActivity extends AppCompatActivity{
         Intent intent=getIntent();
         if (intent!=null){
             String query=intent.getStringExtra(SearchManager.QUERY);
-            BaseFragment searchFragment = new SearchFragment();
+            SearchFragment searchFragment = new SearchFragment();
             searchFragment.setQuery(query);
 
             FragmentManager fragmentManager = getSupportFragmentManager ();

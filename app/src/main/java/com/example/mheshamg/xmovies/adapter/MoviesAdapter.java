@@ -6,26 +6,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.mheshamg.xmovies.R;
-import com.example.mheshamg.xmovies.model.Movie;
+import com.example.mheshamg.xmovies.model.Show;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>{
 
-    private ArrayList<Movie> movies;
+    private ArrayList<Show> shows;
     private int rowLayout;
     private Context context;
     private OnMovieItemClickListener onMovieItemClickListener;
 
 
-    public MoviesAdapter(ArrayList<Movie> movies, int rowLayout, Context context,OnMovieItemClickListener onMovieItemClickListener) {
-        this.movies = movies;
+    public MoviesAdapter(ArrayList<Show> shows, int rowLayout, Context context, OnMovieItemClickListener onMovieItemClickListener) {
+        this.shows = shows;
         this.rowLayout = rowLayout;
         this.context = context;
         this.onMovieItemClickListener=onMovieItemClickListener;
@@ -51,12 +48,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
      */
     private void bindMovieItemWithView(MovieViewHolder holder,int position)
     {
-        holder.moviePosterDraweeView.setImageURI(Uri.parse("https://image.tmdb.org/t/p/original"+movies.get(position).getPosterPath()));
+        holder.moviePosterDraweeView.setImageURI(Uri.parse("https://image.tmdb.org/t/p/original"+ shows.get(position).getPosterPath()));
     }
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        return shows.size();
     }
 
 

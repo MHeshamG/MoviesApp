@@ -6,25 +6,26 @@ import com.example.mheshamg.xmovies.BaseMoviesSubject;
 import com.example.mheshamg.xmovies.MovieSubject;
 import com.example.mheshamg.xmovies.MoviesObserver;
 import com.example.mheshamg.xmovies.MoviesGetter;
-import com.example.mheshamg.xmovies.model.Movie;
+import com.example.mheshamg.xmovies.model.Show;
 import com.example.mheshamg.xmovies.model.MoviesResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.PublishSubject;
 
-public abstract class BaseMoviesNetworkApiGetter implements MoviesGetter {
+import static com.example.mheshamg.xmovies.rest.Constants.API_KEY;
+
+public class BaseMoviesNetworkApiGetter implements MoviesGetter {
 
     private final static String TAG=BaseMoviesNetworkApiGetter.class.getSimpleName();
 
     protected ApiInterface apiService;
     protected DisposableSingleObserver<MoviesResponse> moviesResponseDisposableSingleObserver;
     private MovieSubject movieSubject;
+    protected String query;
 
     public BaseMoviesNetworkApiGetter()
     {
@@ -33,6 +34,10 @@ public abstract class BaseMoviesNetworkApiGetter implements MoviesGetter {
         movieSubject = new BaseMoviesSubject();
     }
 
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
 
     public DisposableSingleObserver<MoviesResponse> getMoviesResponseObserver()
     {
@@ -62,8 +67,14 @@ public abstract class BaseMoviesNetworkApiGetter implements MoviesGetter {
     }
 
     @Override
-    public void notifyObservers(List<Movie> movies){
-        movieSubject.notifyObservers(movies);
+    public void notifyObservers(List<Show> shows){
+        movieSubject.notifyObservers(shows);
+    }
+
+    @Override
+    public void getMovies() {
+        Single<MoviesResponse> moviesResponseSingleObservable = apiService.getCatogerizedMovies(API_KEY,query);
+        bindObserverToObservable(moviesResponseSingleObservable);
     }
 
 }

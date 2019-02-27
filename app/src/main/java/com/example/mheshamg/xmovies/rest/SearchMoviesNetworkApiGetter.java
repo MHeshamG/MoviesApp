@@ -11,7 +11,7 @@ public class SearchMoviesNetworkApiGetter extends BaseMoviesNetworkApiGetter {
     private static final String TAG= SearchMoviesNetworkApiGetter.class.getSimpleName();
 
     @Override
-    public void getMovies(String query) {
+    public void getMovies() {
         Single<MoviesResponse> moviesResponseSingleObservable = apiService.searchForMovie(API_KEY,query);
         bindObserverToObservable(moviesResponseSingleObservable);
     }

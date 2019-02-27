@@ -1,12 +1,11 @@
 package com.example.mheshamg.xmovies.fagments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 
 import com.example.mheshamg.xmovies.R;
 import com.example.mheshamg.xmovies.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenterClass;
-import com.example.mheshamg.xmovies.rest.TopRatedMoviesNetworkApiGetter;
+import com.example.mheshamg.xmovies.rest.BaseMoviesNetworkApiGetter;
 
 public class TopRatedFragment extends BaseFragment {
 
@@ -23,7 +22,9 @@ public class TopRatedFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         context=getContext();
         baseFragmentPresenter=new BaseFragmentPresenterClass();
-        baseFragmentPresenter.setMoviesGetter(new TopRatedMoviesNetworkApiGetter());
+        BaseMoviesNetworkApiGetter topRatedMoviesNetworkApiGetter = new BaseMoviesNetworkApiGetter();
+        topRatedMoviesNetworkApiGetter.setQuery("TopRated");
+        baseFragmentPresenter.setMoviesGetter(topRatedMoviesNetworkApiGetter);
         baseFragmentPresenter.setView(this);
         MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(),R.layout.list_item_movie,context,onMovieItemClickListener);
         baseFragmentPresenter.retriveData();

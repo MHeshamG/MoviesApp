@@ -6,11 +6,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.mheshamg.xmovies.R;
-import com.example.mheshamg.xmovies.model.Movie;
+import com.example.mheshamg.xmovies.model.Show;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 public class MovieDetailsActivity extends AppCompatActivity {
@@ -18,7 +17,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     ActionBar actionBar;
 
-   private Movie movie;
+   private Show show;
 
     private TextView movieTitle;
     private SimpleDraweeView moviePoster;
@@ -38,21 +37,21 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         Intent openingIntent=getIntent();
         if(openingIntent!=null){
-            movie = openingIntent.getParcelableExtra("Movie");
+            show = openingIntent.getParcelableExtra("Show");
         }
 
         movieTitle=findViewById(R.id.movie_details_title);
         moviePoster=findViewById(R.id.movie_poster_view_details);
         movieDetailsText=findViewById(R.id.movie_details_descrption);
 
-        updateView(movie);
+        updateView(show);
     }
 
-    public void updateView(Movie movie) {
-        if (movie!=null) {
-            movieTitle.setText(movie.getTitle());
-            moviePoster.setImageURI(Uri.parse("https://image.tmdb.org/t/p/original" + movie.getPosterPath()));
-            movieDetailsText.setText(movie.getOverview());
+    public void updateView(Show show) {
+        if (show !=null) {
+            movieTitle.setText(show.getTitle());
+            moviePoster.setImageURI(Uri.parse("https://image.tmdb.org/t/p/original" + show.getPosterPath()));
+            movieDetailsText.setText(show.getOverview());
         }
     }
 }

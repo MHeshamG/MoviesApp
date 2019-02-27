@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.example.mheshamg.xmovies.R;
 import com.example.mheshamg.xmovies.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenterClass;
-import com.example.mheshamg.xmovies.rest.PopularMoviesNetworkApiGetter;
+import com.example.mheshamg.xmovies.rest.BaseMoviesNetworkApiGetter;
 
 public class PopularFragment extends BaseFragment {
 
@@ -18,7 +18,9 @@ public class PopularFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         context=getContext();
         baseFragmentPresenter=new BaseFragmentPresenterClass();
-        baseFragmentPresenter.setMoviesGetter(new PopularMoviesNetworkApiGetter());
+        BaseMoviesNetworkApiGetter popularMoviesNetworkApiGetter = new BaseMoviesNetworkApiGetter();
+        popularMoviesNetworkApiGetter.setQuery("popular");
+        baseFragmentPresenter.setMoviesGetter(popularMoviesNetworkApiGetter);
         baseFragmentPresenter.setView(this);
         MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(), R.layout.list_item_movie,context,onMovieItemClickListener);
         baseFragmentPresenter.retriveData();

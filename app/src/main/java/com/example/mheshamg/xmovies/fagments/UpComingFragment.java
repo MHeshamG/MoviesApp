@@ -4,7 +4,7 @@ import android.os.Bundle;
 import com.example.mheshamg.xmovies.R;
 import com.example.mheshamg.xmovies.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenterClass;
-import com.example.mheshamg.xmovies.rest.UpComingMoviesNetworkApiGetter;
+import com.example.mheshamg.xmovies.rest.BaseMoviesNetworkApiGetter;
 
 public class UpComingFragment extends BaseFragment {
 
@@ -17,7 +17,9 @@ public class UpComingFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         context=getContext();
         baseFragmentPresenter=new BaseFragmentPresenterClass();
-        baseFragmentPresenter.setMoviesGetter(new UpComingMoviesNetworkApiGetter());
+        BaseMoviesNetworkApiGetter upcomingMoviesNetworkApiGetter = new BaseMoviesNetworkApiGetter();
+        upcomingMoviesNetworkApiGetter.setQuery("upcoming");
+        baseFragmentPresenter.setMoviesGetter(upcomingMoviesNetworkApiGetter);
         baseFragmentPresenter.setView(this);
         MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(),R.layout.list_item_movie,context,onMovieItemClickListener);
         baseFragmentPresenter.retriveData();

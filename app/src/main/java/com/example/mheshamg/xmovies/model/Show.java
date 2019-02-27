@@ -5,10 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Movie implements Parcelable {
+public class Show implements Parcelable {
 
     @SerializedName("poster_path")
     private String posterPath;
@@ -107,7 +104,7 @@ public class Movie implements Parcelable {
     }
 
 
-    protected Movie(Parcel in) {
+    protected Show(Parcel in) {
         posterPath = in.readString();
         adult = in.readByte() != 0x00;
         overview = in.readString();
@@ -167,15 +164,15 @@ public class Movie implements Parcelable {
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
+    public static final Parcelable.Creator<Show> CREATOR = new Parcelable.Creator<Show>() {
         @Override
-        public Movie createFromParcel(Parcel in) {
-            return new Movie(in);
+        public Show createFromParcel(Parcel in) {
+            return new Show(in);
         }
 
         @Override
-        public Movie[] newArray(int size) {
-            return new Movie[size];
+        public Show[] newArray(int size) {
+            return new Show[size];
         }
     };
 }

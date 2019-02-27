@@ -1,6 +1,6 @@
 package com.example.mheshamg.xmovies;
 
-import com.example.mheshamg.xmovies.model.Movie;
+import com.example.mheshamg.xmovies.model.Show;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +19,8 @@ public class BaseMoviesSubject implements MovieSubject {
     }
 
     @Override
-    public void notifyObservers(List<Movie> movies) {
+    public void notifyObservers(List<Show> shows) {
         for(MoviesObserver moviesObserver:moviesObservers)
-            moviesObserver.moviesRetrived(movies);
+            moviesObserver.moviesRetrived(shows);
     }
 }
