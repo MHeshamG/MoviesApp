@@ -7,10 +7,7 @@ import com.example.mheshamg.xmovies.MovieSubject;
 import com.example.mheshamg.xmovies.MoviesObserver;
 import com.example.mheshamg.xmovies.MoviesGetter;
 import com.example.mheshamg.xmovies.model.Show;
-import com.example.mheshamg.xmovies.model.MoviesResponse;
-
 import java.util.List;
-
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
@@ -20,7 +17,7 @@ import static com.example.mheshamg.xmovies.rest.Constants.API_KEY;
 
 public class BaseMoviesNetworkApiGetter implements MoviesGetter {
 
-    private final static String TAG=BaseMoviesNetworkApiGetter.class.getSimpleName();
+    private final static String TAG = BaseMoviesNetworkApiGetter.class.getSimpleName();
 
     protected ApiInterface apiService;
     protected DisposableSingleObserver<MoviesResponse> moviesResponseDisposableSingleObserver;

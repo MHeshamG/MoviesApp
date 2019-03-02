@@ -31,6 +31,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 
 import com.example.mheshamg.xmovies.adapter.ViewPagerAdapter;
 
+import static com.example.mheshamg.xmovies.fagments.FragmentsNames.FAVORITES_FRAGMENT;
 import static com.example.mheshamg.xmovies.fagments.FragmentsNames.POPULAR_FRAGMENT;
 import static com.example.mheshamg.xmovies.fagments.FragmentsNames.TOP_RATED_FRAGMENT;
 import static com.example.mheshamg.xmovies.fagments.FragmentsNames.UPCOMING_FRAGMENT;
@@ -169,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
         adapter.addFragment(mainActivityPresenter.getFragment(UPCOMING_FRAGMENT), "Up Coming");
         adapter.addFragment(mainActivityPresenter.getFragment(TOP_RATED_FRAGMENT), "Top Rated");
         adapter.addFragment(mainActivityPresenter.getFragment(POPULAR_FRAGMENT), "Popular");
+        adapter.addFragment(mainActivityPresenter.getFragment(FAVORITES_FRAGMENT), "Favourites");
         viewPager.setAdapter(adapter);
     }
 

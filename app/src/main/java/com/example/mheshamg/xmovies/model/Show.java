@@ -1,10 +1,13 @@
 package com.example.mheshamg.xmovies.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "shows")
 public class Show implements Parcelable {
 
     @SerializedName("poster_path")
@@ -15,6 +18,7 @@ public class Show implements Parcelable {
     private String overview;
     @SerializedName("release_date")
     private String releaseDate;
+    @PrimaryKey
     @SerializedName("id")
     private Long id;
     @SerializedName("title")
@@ -23,6 +27,15 @@ public class Show implements Parcelable {
     private String backdropPath;
     @SerializedName("popularity")
     private Double popularity;
+
+    public void setVoteCount(Integer voteCount) {
+        this.voteCount = voteCount;
+    }
+
+    public void setVideo(Boolean video) {
+        this.video = video;
+    }
+
     @SerializedName("vote_count")
     private Integer voteCount;
     @SerializedName("video")
@@ -30,6 +43,9 @@ public class Show implements Parcelable {
     @SerializedName("vote_average")
     private Double voteAverage;
 
+    public Show() {
+
+    }
 
     public String getPosterPath() {
         return posterPath;
@@ -103,6 +119,13 @@ public class Show implements Parcelable {
         this.voteAverage = voteAverage;
     }
 
+    public Integer getVoteCount() {
+        return voteCount;
+    }
+
+    public Boolean getVideo() {
+        return video;
+    }
 
     protected Show(Parcel in) {
         posterPath = in.readString();
