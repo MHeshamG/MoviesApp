@@ -31,6 +31,6 @@ public class SearchFragment extends BaseFragment {
         baseFragmentPresenter.setMoviesGetter(searchMoviesNetworkApiGetter);
         baseFragmentPresenter.setView(this);
         MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(), R.layout.list_item_movie,context,onMovieItemClickListener);
-        baseFragmentPresenter.retriveData();
+        baseFragmentPresenter.retriveData(getQuery());
     }
 }
