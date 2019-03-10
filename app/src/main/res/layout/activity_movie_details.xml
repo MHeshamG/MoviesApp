@@ -54,5 +54,15 @@
         android:layout_height="wrap_content"
         />
 
+    <ImageButton
+        android:id="@+id/save_btn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/circular_background"
+        android:src="@drawable/ic_favorite"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal"
+        />
+
 
 </LinearLayout>

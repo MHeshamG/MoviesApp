@@ -2,6 +2,7 @@ package com.example.mheshamg.xmovies.room;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.util.Log;
 
 import com.example.mheshamg.xmovies.MoviesGetter;
 import com.example.mheshamg.xmovies.MoviesObserver;
@@ -10,6 +11,9 @@ import com.example.mheshamg.xmovies.model.Show;
 import java.util.List;
 
 import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.Scheduler;
 import io.reactivex.SingleObserver;
@@ -19,6 +23,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class ShowsLocalCacheManager {
+    private static final String TAG = ShowsLocalCacheManager.class.getSimpleName();
     private static final String DB_NAME = "show-database";
     private Context context;
     private static ShowsLocalCacheManager _instance;
@@ -46,7 +51,20 @@ public class ShowsLocalCacheManager {
     }
 
     public void addShow(Show show) {
-        db.showDao().insertShow(show);
+        Observable.create(new ObservableOnSubscribe<Long>() {
+            @Override
+            public void subscribe(ObservableEmitter<Long> emitter) throws Exception {
+                Long id = db.showDao().insertShow(show);
+                if(!emitter.isDisposed()){
+                    emitter.onNext(id);
+                }
+            }
+        }).subscribeOn(Schedulers.io()).subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Exception {
+                Log.d(TAG,"Inserted with id"+aLong);
+            }
+        });
     }
 
     public void deleteShow(Show show) {

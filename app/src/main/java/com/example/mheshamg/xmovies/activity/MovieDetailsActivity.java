@@ -6,10 +6,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.mheshamg.xmovies.R;
 import com.example.mheshamg.xmovies.model.Show;
+import com.example.mheshamg.xmovies.room.ShowsLocalCacheManager;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 public class MovieDetailsActivity extends AppCompatActivity {
@@ -22,6 +24,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
     private TextView movieTitle;
     private SimpleDraweeView moviePoster;
     private TextView movieDetailsText;
+    private ImageButton saveBtn;
 
 
     @Override
@@ -40,9 +43,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
             show = openingIntent.getParcelableExtra("Show");
         }
 
-        movieTitle=findViewById(R.id.movie_details_title);
-        moviePoster=findViewById(R.id.movie_poster_view_details);
-        movieDetailsText=findViewById(R.id.movie_details_descrption);
+        movieTitle = findViewById(R.id.movie_details_title);
+        moviePoster = findViewById(R.id.movie_poster_view_details);
+        movieDetailsText = findViewById(R.id.movie_details_descrption);
+        saveBtn = findViewById(R.id.save_btn);
+
+        saveBtn.setOnClickListener(view -> ShowsLocalCacheManager.getInstance(this).addShow(show));
 
         updateView(show);
     }

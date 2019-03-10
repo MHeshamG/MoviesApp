@@ -3,6 +3,7 @@ package com.example.mheshamg.xmovies.room;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
@@ -21,7 +22,7 @@ public interface ShowDao {
     @Query("SELECT * FROM shows")
     Flowable<List<Show>> loadAll();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     Long insertShow(Show show);
 
     @Delete
