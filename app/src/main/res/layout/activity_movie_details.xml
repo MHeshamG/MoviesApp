@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MovieDetailsActivity"
+    tools:context=".view.activity.MovieDetailsActivity"
     xmlns:fresco="http://schemas.android.com/tools"
     android:orientation="vertical">
+<include layout="@layout/toolbar"/>
+<LinearLayout
+    android:layout_gravity="center_horizontal"
+    android:id="@+id/details_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
 
-    <include layout="@layout/toolbar"></include>
 
 
-
-        <!--   android:background="@drawable/one_side_border"-->
 <android.support.v7.widget.CardView
-    android:layout_width="200dp"
-    android:layout_height="300dp"
+    android:id="@+id/poster_card_view"
+    android:layout_width="230dp"
+    android:layout_height="0dp"
     app:cardCornerRadius="10dp"
     android:layout_gravity="center_horizontal"
-    android:layout_marginTop="20dp">
+    android:layout_marginTop="10dp"
+    android:layout_weight="6">
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/movie_poster_view_details"
             android:layout_width="match_parent"
@@ -35,24 +43,22 @@
         android:layout_marginTop="8dp"
         android:text="Title"
         android:fontFamily="sans-serif-light"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-    <TextView
-        android:gravity="center_horizontal"
-        android:id="@+id/movie_details_descrption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        android:layout_marginTop="4dp"
-        android:padding="4dp"
-        android:fontFamily="sans-serif-light"
-        android:textColor="@color/colorBlack"/>
-
-    <TextView
-        android:id="@+id/rating_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         />
+
+    <TextView
+        android:id="@+id/movie_details_descrption"
+        android:layout_width="250dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1.5"
+        android:fontFamily="sans-serif-light"
+        android:padding="8dp"
+        android:scrollbars="vertical"
+        android:text="Title"
+        android:textColor="@color/colorBlack" />
+
+
 
     <ImageButton
         android:id="@+id/save_btn"
@@ -62,7 +68,9 @@
         android:src="@drawable/ic_favorite"
         android:padding="5dp"
         android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp"
         />
 
 
+</LinearLayout>
 </LinearLayout>
