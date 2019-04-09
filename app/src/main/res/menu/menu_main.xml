@@ -12,7 +12,7 @@
         app:actionViewClass="android.support.v7.widget.SearchView"/>
 
     <item
-        android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+        android:id="@+id/action_nearby_cinemas"
+        android:title="@string/action_nearby_cinemas"
        app:showAsAction="never" />
 </menu>

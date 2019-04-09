@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,25 +8,33 @@
     tools:context=".view.activity.MovieDetailsActivity"
     xmlns:fresco="http://schemas.android.com/tools"
     android:orientation="vertical">
-<include layout="@layout/toolbar"/>
-<LinearLayout
+<include
+    layout="@layout/toolbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+    <LinearLayout
     android:layout_gravity="center_horizontal"
     android:id="@+id/details_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp">
-
+    android:padding="8dp"
+        android:weightSum="8"
+   >
 
 
 <android.support.v7.widget.CardView
     android:id="@+id/poster_card_view"
     android:layout_width="230dp"
-    android:layout_height="0dp"
+    android:layout_height="330dp"
     app:cardCornerRadius="10dp"
     android:layout_gravity="center_horizontal"
     android:layout_marginTop="10dp"
-    android:layout_weight="6">
+    >
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/movie_poster_view_details"
             android:layout_width="match_parent"
@@ -44,33 +52,39 @@
         android:text="Title"
         android:fontFamily="sans-serif-light"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:gravity="center"
         />
 
     <TextView
         android:id="@+id/movie_details_descrption"
         android:layout_width="250dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="1.5"
         android:fontFamily="sans-serif-light"
         android:padding="8dp"
         android:scrollbars="vertical"
         android:text="Title"
-        android:textColor="@color/colorBlack" />
+        android:textColor="@color/colorBlack"
+        />
 
 
 
+
+
+
+</LinearLayout>
+    </ScrollView>
     <ImageButton
         android:id="@+id/save_btn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:background="@drawable/circular_background"
         android:src="@drawable/ic_favorite"
         android:padding="5dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         />
 
-
-</LinearLayout>
-</LinearLayout>
+</RelativeLayout>

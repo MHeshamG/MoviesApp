@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewPager;
@@ -142,19 +143,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(searchActivityIntent);
                 return true;
 
-            case R.id.action_settings:
+            case R.id.action_nearby_cinemas:
+                showNearByCinemas();
                 return true;
 
             default:
             return super.onOptionsItemSelected(item);
         }
-    }
-
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
 
@@ -226,6 +221,13 @@ public class MainActivity extends AppCompatActivity {
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    }
+
+    private void showNearByCinemas(){
+        Uri nearByCinemasIntentUri = Uri.parse("geo:0,0?q=cinemas");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, nearByCinemasIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
     }
 
 }
