@@ -3,6 +3,7 @@
     package="com.example.mheshamg.xmovies">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".view.activity.MainActivity"
             android:launchMode="singleTop">
 
             <intent-filter>
@@ -26,20 +27,20 @@
         </activity>
 
         <activity
-            android:name=".activity.MovieDetailsActivity"
+            android:name=".view.activity.MovieDetailsActivity"
             android:theme="@style/MyMaterialTheme2">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.mheshamg.xmovies.activity.MainActivity" />
+                android:value="com.example.mheshamg.xmovies.view.activity.MainActivity" />
 
         </activity>
 
-        <activity android:name=".activity.SearchActivity"
+        <activity android:name=".view.activity.SearchActivity"
             android:theme="@style/MyMaterialTheme2">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.mheshamg.xmovies.activity.MainActivity" />
+                android:value="com.example.mheshamg.xmovies.view.activity.MainActivity" />
 
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
