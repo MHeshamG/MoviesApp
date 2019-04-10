@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import com.example.mheshamg.xmovies.R;
 import com.example.mheshamg.xmovies.view.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenterClass;
-import com.example.mheshamg.xmovies.business.rest.TopRatedMoviesNetworkApiGetter;
+import com.example.mheshamg.xmovies.business.movie_getters.TopRatedMoviesNetworkApiGetter;
 
 
 /**

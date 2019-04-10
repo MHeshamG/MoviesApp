@@ -1,10 +1,10 @@
-package com.example.mheshamg.xmovies.business.room;
+package com.example.mheshamg.xmovies.business;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.mheshamg.xmovies.business.MoviesGetter;
+import com.example.mheshamg.xmovies.frameworks.room.AppDatabase;
 import com.example.mheshamg.xmovies.model.Show;
 
 import java.util.List;

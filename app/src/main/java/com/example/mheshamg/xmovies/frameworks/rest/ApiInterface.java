@@ -1,4 +1,4 @@
-package com.example.mheshamg.xmovies.business.rest;
+package com.example.mheshamg.xmovies.frameworks.rest;
 
 import com.example.mheshamg.xmovies.model.ShowsResponse;
 import io.reactivex.Single;

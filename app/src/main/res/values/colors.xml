@@ -3,7 +3,7 @@
 
     <color name="colorPrimary">#f50057</color>
     <color name="colorPrimaryDark">#bb002f</color>
-    <color name="colorAccent">#fff176</color>
+    <color name="colorAccent">#f50057</color>
 
     <color name="background">#FFF</color>
 
@@ -18,4 +18,5 @@
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
+    <color name="bliue">#03A9F4</color>
 </resources>

@@ -1,13 +1,8 @@
 package com.example.mheshamg.xmovies.view.activity;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.Snackbar;
-import android.support.transition.ChangeBounds;
-import android.support.transition.ChangeImageTransform;
-import android.support.transition.TransitionManager;
-import android.support.transition.TransitionSet;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,18 +11,15 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.BounceInterpolator;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.mheshamg.xmovies.R;
 import com.example.mheshamg.xmovies.model.Show;
-import com.example.mheshamg.xmovies.business.room.ShowsLocalCacheManager;
+import com.example.mheshamg.xmovies.business.ShowsLocalCacheManager;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 public class MovieDetailsActivity extends AppCompatActivity {

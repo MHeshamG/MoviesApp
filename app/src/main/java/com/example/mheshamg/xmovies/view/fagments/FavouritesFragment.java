@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.example.mheshamg.xmovies.R;
 import com.example.mheshamg.xmovies.view.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenterClass;
-import com.example.mheshamg.xmovies.business.room.DatabaseMoviesGetter;
+import com.example.mheshamg.xmovies.business.movie_getters.DatabaseMoviesGetter;
 
 public class FavouritesFragment extends BaseFragment{
 

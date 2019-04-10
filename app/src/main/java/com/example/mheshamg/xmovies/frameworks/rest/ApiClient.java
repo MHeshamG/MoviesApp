@@ -1,4 +1,4 @@
-package com.example.mheshamg.xmovies.business.rest;
+package com.example.mheshamg.xmovies.frameworks.rest;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 

@@ -12,7 +12,7 @@ import static com.example.mheshamg.xmovies.view.fagments.FragmentsNames.FAVORITE
 import static com.example.mheshamg.xmovies.view.fagments.FragmentsNames.POPULAR_FRAGMENT;
 import static com.example.mheshamg.xmovies.view.fagments.FragmentsNames.TOP_RATED_FRAGMENT;
 import static com.example.mheshamg.xmovies.view.fagments.FragmentsNames.UPCOMING_FRAGMENT;
-import static com.example.mheshamg.xmovies.business.rest.Constants.API_KEY;
+import static com.example.mheshamg.xmovies.frameworks.rest.Constants.API_KEY;
 
 public class MainActivityPresenter
 {

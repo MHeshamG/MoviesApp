@@ -1,10 +1,12 @@
 package com.example.mheshamg.xmovies.view.fagments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,9 +85,23 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
     }
 
     public void updateView(List<Show> movies) {
-        this.movies=movies;
-        MoviesAdapter.notifyDataSetChanged();
-        showViews();
+        if (movies!=null && !movies.isEmpty()) {
+            this.movies = movies;
+            MoviesAdapter.notifyDataSetChanged();
+            showViews();
+        }
+        else {
+            new AlertDialog.Builder(getContext())
+                    .setTitle("Failed to load movies")
+                    .setMessage("Invalid received data")
+                    .setPositiveButton("GO BACK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            getActivity().finish();
+                        }
+                    })
+                    .show();
+        }
     }
 
     private void showViews() {
@@ -93,6 +109,11 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
         recyclerView.setVisibility(View.VISIBLE);
         dataRelativeLayout.setVisibility(View.VISIBLE);
         created=true;
+    }
+
+    private void hideViews(){
+        recyclerView.setVisibility(View.INVISIBLE);
+        dataRelativeLayout.setVisibility(View.INVISIBLE);
     }
 
 

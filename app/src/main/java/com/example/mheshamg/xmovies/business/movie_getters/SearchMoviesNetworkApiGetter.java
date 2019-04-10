@@ -1,5 +1,7 @@
-package com.example.mheshamg.xmovies.business.rest;
+package com.example.mheshamg.xmovies.business.movie_getters;
 
+import com.example.mheshamg.xmovies.frameworks.rest.BaseMoviesNetworkApiGetter;
+import com.example.mheshamg.xmovies.frameworks.rest.Constants;
 import com.example.mheshamg.xmovies.model.ShowsResponse;
 
 import io.reactivex.Single;

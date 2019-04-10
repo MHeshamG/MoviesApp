@@ -4,7 +4,7 @@ import android.os.Bundle;
 import com.example.mheshamg.xmovies.R;
 import com.example.mheshamg.xmovies.view.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenterClass;
-import com.example.mheshamg.xmovies.business.rest.UpComingMoviesNetworkApiGetter;
+import com.example.mheshamg.xmovies.business.movie_getters.rest.UpComingMoviesNetworkApiGetter;
 
 public class UpComingFragment extends BaseFragment implements MoviesAdapter.OnMovieItemClickListener {
 

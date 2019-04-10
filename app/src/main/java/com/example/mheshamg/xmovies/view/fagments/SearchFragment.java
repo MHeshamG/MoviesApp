@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.example.mheshamg.xmovies.R;
 import com.example.mheshamg.xmovies.view.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenterClass;
-import com.example.mheshamg.xmovies.business.rest.SearchMoviesNetworkApiGetter;
+import com.example.mheshamg.xmovies.business.movie_getters.SearchMoviesNetworkApiGetter;
 
 
 public class SearchFragment extends BaseFragment {

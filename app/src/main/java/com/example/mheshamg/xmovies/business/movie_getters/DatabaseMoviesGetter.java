@@ -1,4 +1,4 @@
-package com.example.mheshamg.xmovies.business.room;
+package com.example.mheshamg.xmovies.business.movie_getters;
 
 import android.content.Context;
 
@@ -6,6 +6,7 @@ import com.example.mheshamg.xmovies.business.BaseMoviesSubject;
 import com.example.mheshamg.xmovies.business.MovieSubject;
 import com.example.mheshamg.xmovies.business.MoviesGetter;
 import com.example.mheshamg.xmovies.business.MoviesObserver;
+import com.example.mheshamg.xmovies.business.ShowsLocalCacheManager;
 import com.example.mheshamg.xmovies.model.Show;
 
 import java.util.List;
