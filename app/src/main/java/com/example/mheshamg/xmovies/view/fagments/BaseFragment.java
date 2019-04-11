@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.mheshamg.xmovies.R;
-import com.example.mheshamg.xmovies.view.activity.MovieDetailsActivity;
+import com.example.mheshamg.xmovies.view.activity.BaseMovieDetailsActivity;
 import com.example.mheshamg.xmovies.view.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.model.Show;
 import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenter;
@@ -41,13 +41,14 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
     private TextView rating;
     private TextView date;
 
+    private OnMovieClickListener onMovieClickListener;
+
     private boolean created=false;
     protected MoviesAdapter.OnMovieItemClickListener onMovieItemClickListener = new MoviesAdapter.OnMovieItemClickListener() {
         @Override
         public void onMovieItemClick(int position) {
-            Intent detailsActiviyIntent=new Intent(getContext(), MovieDetailsActivity.class);
-            detailsActiviyIntent.putExtra("Show",movies.get(position));
-            startActivity(detailsActiviyIntent);
+           if (onMovieClickListener!=null)
+               onMovieClickListener.performAction(position);
         }
     };
 
@@ -84,34 +85,16 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
         return rootView;
     }
 
-    public void updateView(List<Show> movies) {
-        if (movies!=null && !movies.isEmpty()) {
-            this.movies = movies;
-            MoviesAdapter.notifyDataSetChanged();
-            showViews();
-        }
-        else {
-            new AlertDialog.Builder(getContext())
-                    .setTitle("Failed to load movies")
-                    .setMessage("Invalid received data")
-                    .setPositiveButton("GO BACK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            getActivity().finish();
-                        }
-                    })
-                    .show();
-        }
-    }
+    public abstract void updateView(List<Show> movies);
 
-    private void showViews() {
+    protected void showViews() {
         hideProgressBar();
         recyclerView.setVisibility(View.VISIBLE);
         dataRelativeLayout.setVisibility(View.VISIBLE);
         created=true;
     }
 
-    private void hideViews(){
+    protected void hideViews(){
         recyclerView.setVisibility(View.INVISIBLE);
         dataRelativeLayout.setVisibility(View.INVISIBLE);
     }
@@ -126,11 +109,19 @@ public abstract class BaseFragment extends Fragment implements DiscreteScrollVie
         }
     }
 
-    private void hideProgressBar(){
+    protected void hideProgressBar(){
         loadingProgressBar.setVisibility(View.GONE);
     }
 
     public void showProgressBar(){
         loadingProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void setOnMovieClickListener(OnMovieClickListener onMovieClickListener) {
+        this.onMovieClickListener = onMovieClickListener;
+    }
+
+    public interface OnMovieClickListener{
+        void performAction(int position);
     }
 }

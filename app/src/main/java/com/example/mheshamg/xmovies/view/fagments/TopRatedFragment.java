@@ -1,9 +1,11 @@
 package com.example.mheshamg.xmovies.view.fagments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.example.mheshamg.xmovies.R;
+import com.example.mheshamg.xmovies.view.activity.NetworkAPIMovieDetailsActivity;
 import com.example.mheshamg.xmovies.view.adapter.MoviesAdapter;
 import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenterClass;
 import com.example.mheshamg.xmovies.business.movie_getters.TopRatedMoviesNetworkApiGetter;
@@ -17,7 +19,7 @@ import com.example.mheshamg.xmovies.business.movie_getters.TopRatedMoviesNetwork
  * Use the  factory method to
  * create an instance of this fragment.
  */
-public class TopRatedFragment extends BaseFragment {
+public class TopRatedFragment extends NetworkBasedFragment {
 
     private static final String TAG=TopRatedFragment.class.getSimpleName();
 
@@ -30,6 +32,11 @@ public class TopRatedFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setOnMovieClickListener((int position)-> {
+            Intent detailsActiviyIntent=new Intent(getContext(), NetworkAPIMovieDetailsActivity.class);
+            detailsActiviyIntent.putExtra("Show",movies.get(position));
+            startActivity(detailsActiviyIntent);
+        });
         context=getContext();
         baseFragmentPresenter=new BaseFragmentPresenterClass();
         baseFragmentPresenter.setMoviesGetter(new TopRatedMoviesNetworkApiGetter());

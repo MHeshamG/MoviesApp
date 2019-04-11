@@ -2,6 +2,7 @@ package com.example.mheshamg.xmovies.business;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.example.mheshamg.xmovies.frameworks.room.AppDatabase;
@@ -62,6 +63,14 @@ public class ShowsLocalCacheManager {
     }
 
     public void deleteShow(Show show) {
-        db.showDao().deleteShow(show);
+
+        Observable.create((ObservableOnSubscribe<Integer>) emitter -> {
+            Integer id = db.showDao().deleteShow(show);
+            if(!emitter.isDisposed()){
+                emitter.onNext(id);
+            }
+        }).subscribeOn(Schedulers.io()).subscribe(aInt-> {
+                Log.d(TAG,"Inserted with id"+aInt);
+        });
     }
 }
