@@ -14,7 +14,7 @@ import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenterClass;
 
 import java.util.List;
 
-public class UpComingFragment extends NetworkBasedFragment {
+public class UpComingFragment extends BaseFragment {
 
     public UpComingFragment() {
         // Required empty public constructor
@@ -28,11 +28,9 @@ public class UpComingFragment extends NetworkBasedFragment {
             detailsActiviyIntent.putExtra("Show",movies.get(position));
             startActivity(detailsActiviyIntent);
         });
-        context=getContext();
-        baseFragmentPresenter=new BaseFragmentPresenterClass();
         baseFragmentPresenter.setMoviesGetter(new UpComingMoviesNetworkApiGetter());
-        baseFragmentPresenter.setView(this);
         MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(),R.layout.list_item_movie,context,onMovieItemClickListener);
         baseFragmentPresenter.retriveData("none");
+
     }
 }

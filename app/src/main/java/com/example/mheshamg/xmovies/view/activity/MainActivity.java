@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         rootLayout=findViewById(R.id.root_layout);
 
 
+
         if (savedInstanceState == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             circularAnimationActivity();
         }
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         Fresco.initialize(this);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setOffscreenPageLimit(4);
 
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -96,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     @Override

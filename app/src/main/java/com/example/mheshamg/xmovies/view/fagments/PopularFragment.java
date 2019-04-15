@@ -14,7 +14,7 @@ import com.example.mheshamg.xmovies.business.movie_getters.PopularMoviesNetworkA
 
 import java.util.List;
 
-public class PopularFragment extends NetworkBasedFragment {
+public class PopularFragment extends BaseFragment {
 
     public PopularFragment() {
         // Required empty public constructor
@@ -28,10 +28,7 @@ public class PopularFragment extends NetworkBasedFragment {
             detailsActiviyIntent.putExtra("Show",movies.get(position));
             startActivity(detailsActiviyIntent);
         });
-        context=getContext();
-        baseFragmentPresenter=new BaseFragmentPresenterClass();
         baseFragmentPresenter.setMoviesGetter(new PopularMoviesNetworkApiGetter());
-        baseFragmentPresenter.setView(this);
         MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(), R.layout.list_item_movie,context,onMovieItemClickListener);
         baseFragmentPresenter.retriveData("none");
     }

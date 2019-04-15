@@ -19,12 +19,10 @@ public abstract class BaseMoviesNetworkApiGetter implements MoviesGetter {
     private final static String TAG = BaseMoviesNetworkApiGetter.class.getSimpleName();
 
     protected ApiInterface apiService;
-    protected DisposableSingleObserver<ShowsResponse> moviesResponseDisposableSingleObserver;
     private MovieSubject movieSubject;
 
     public BaseMoviesNetworkApiGetter()
     {
-        moviesResponseDisposableSingleObserver=getMoviesResponseObserver();
         apiService=ApiClient.getApiInterface();
         movieSubject = new BaseMoviesSubject();
     }
@@ -49,7 +47,7 @@ public abstract class BaseMoviesNetworkApiGetter implements MoviesGetter {
     public void bindObserverToObservable(Single<ShowsResponse> moviesResponseSingleObservable){
         moviesResponseSingleObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(moviesResponseDisposableSingleObserver);
+                .subscribeWith(getMoviesResponseObserver());
     }
 
     @Override

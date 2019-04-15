@@ -33,6 +33,20 @@
                 android:value="com.example.mheshamg.xmovies.view.activity.MainActivity" />
         </activity>
         <activity
+            android:name=".view.activity.NetworkAPIMovieDetailsActivity"
+            android:theme="@style/MyMaterialTheme2">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.mheshamg.xmovies.view.activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".view.activity.FavoriteDetailsActivity"
+            android:theme="@style/MyMaterialTheme2">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.mheshamg.xmovies.view.activity.MainActivity" />
+        </activity>
+        <activity
             android:name=".view.activity.SearchActivity"
             android:theme="@style/MyMaterialTheme2">
             <meta-data
@@ -49,8 +63,6 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".view.activity.FavoriteDetailsActivity" />
-        <activity android:name=".view.activity.NetworkAPIMovieDetailsActivity"></activity>
     </application>
 
 </manifest>

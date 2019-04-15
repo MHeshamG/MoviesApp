@@ -10,7 +10,7 @@ import com.example.mheshamg.xmovies.presenter.BaseFragmentPresenterClass;
 import com.example.mheshamg.xmovies.business.movie_getters.SearchMoviesNetworkApiGetter;
 
 
-public class SearchFragment extends NetworkBasedFragment {
+public class SearchFragment extends BaseFragment {
 
     public SearchFragment() {
         // Required empty public constructor
@@ -24,10 +24,7 @@ public class SearchFragment extends NetworkBasedFragment {
             detailsActiviyIntent.putExtra("Show",movies.get(position));
             startActivity(detailsActiviyIntent);
         });
-        context=getContext();
-        baseFragmentPresenter=new BaseFragmentPresenterClass();
         baseFragmentPresenter.setMoviesGetter(new SearchMoviesNetworkApiGetter());
-        baseFragmentPresenter.setView(this);
         MoviesAdapter=new MoviesAdapter(baseFragmentPresenter.getMoviesList(), R.layout.list_item_movie,context,onMovieItemClickListener);
         baseFragmentPresenter.retriveData(getQuery());
     }

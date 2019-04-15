@@ -30,5 +30,47 @@
     <include
         layout="@layout/movies_data_layout"/>
 </FrameLayout>
+    <ImageView
+        android:id="@+id/no_data_retrieved_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/icons8_delete_database_96"
+        android:visibility="invisible"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/no_data_retrieved_text"/>
+
+    <TextView
+        android:id="@+id/no_data_retrieved_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="No Movies To Show"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        android:textColor="@color/colorBlack"/>
+
+    <ImageView
+        android:id="@+id/reload_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_reload"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        android:layout_above="@id/error_text"
+        />
+    <TextView
+        android:id="@+id/error_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Error"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        android:textColor="@color/colorBlack"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
 
 </RelativeLayout>

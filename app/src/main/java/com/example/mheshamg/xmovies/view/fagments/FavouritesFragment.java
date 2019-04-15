@@ -44,15 +44,7 @@ public class FavouritesFragment extends BaseFragment{
             showViews();
         }
         else {
-            hideViews();
-            new AlertDialog.Builder(getContext())
-                    .setTitle("No Movies Saved")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                        }
-                    })
-                    .show();
+            showNoDataView();
         }
     }
     }
